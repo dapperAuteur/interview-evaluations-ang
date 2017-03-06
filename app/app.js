@@ -1,17 +1,15 @@
 'use strict';
-var temba = angular.module('myApp', [
+var ie = angular.module('myApp', [
   //external
   'ui.router',
   'ui.bootstrap',
 
   //internal
-  'dateDirective',
-  'faqDirective',
+  'dateDirective'
   // 'HomeCtrl',
-  'iSHelpFormDirective'
 
 ]);
-  temba.config(function($stateProvider, $urlRouterProvider) {
+  ie.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('home', {

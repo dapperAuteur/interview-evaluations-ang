@@ -1,0 +1,19 @@
+{
+  "name": "interview-evaluations-angular",
+  "version": "1.0.0",
+  "description": "This is the front end to the interview-evaluations project done in java.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dapperAuteur/interview-evaluations-ang.git"
+  },
+  "author": "awe and the good folks at revature 1701-jan09-java-asu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dapperAuteur/interview-evaluations-ang/issues"
+  },
+  "homepage": "https://github.com/dapperAuteur/interview-evaluations-ang#readme"
+}
