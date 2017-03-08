@@ -1,1 +1,10 @@
 <h1>Trainees Template</h1>
+<div data-ng-controller="TraineesCtrl as train">
+  <input type="text" data-ng-model="input"/>
+  <button data-ng-click="train.getTrainees(input)">Get Trainees</button>
+
+  <div data-ng-show="train.trainees">
+    <div>{{train.trainees.firstName}}</div>
+    <!-- <img alt="Pokemon Image" data-ng-src="{{train.pokemon.sprites.front_default}}"/> -->
+  </div>
+</div>

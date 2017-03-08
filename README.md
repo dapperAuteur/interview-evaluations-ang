@@ -10,3 +10,10 @@
 ###`node node_modules\http-server\bin\http-server -p 80`
 ####This will run the server on port 80. You may choose any port you like changing the number following `...-p `
 ####The backward slashes (`\`) may need to be changed to forward slashes (`/`) on your local machine.
+
+#Connecting To API
+##You'll get an `xmlhttpRequest cannot load` error when connecting
+##The solution is adding an annotation in the controller above the `@RestController` annotation
+##Add `@CrossOrigin(origins = "*", maxAge = 3600)` above `@RestController` to resolve the issue
+###This will allow any site to connect to the API for 3.6 seconds
+###Replace the star (`*`) with your specific domain to restrict access.

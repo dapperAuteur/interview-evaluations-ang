@@ -2,10 +2,10 @@
 var ie = angular.module('myApp', [
   //external
   'ui.router',
-  'ui.bootstrap',
+  'ui.bootstrap'
 
   //internal
-  'dateDirective'
+  // 'dateDirective'
   // 'HomeCtrl',
 
 ]);
