@@ -7,7 +7,7 @@ angular.module('myApp').controller('TraineesCtrl', function($http){
 
     $http({
       method: "GET",
-      url: "//localhost:8080/api/v1/trainees/" + input + "/"
+      url: "//localhost:8080/api/v1/persons/" + input + "/"
     }).then(function(response){
       console.log(response);
       myData.trainees = response.data;
