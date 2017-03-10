@@ -12,6 +12,7 @@
 ####The backward slashes (`\`) may need to be changed to forward slashes (`/`) on your local machine.
 
 #Connecting To API
+##Both the api and the ui need to have a server serve the data on separate ports
 ##You'll get an `xmlhttpRequest cannot load` error when connecting
 ##The solution is adding an annotation in the controller above the `@RestController` annotation
 ##Add `@CrossOrigin(origins = "*", maxAge = 3600)` above `@RestController` to resolve the issue
