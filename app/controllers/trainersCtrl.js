@@ -1,2 +1,5 @@
-'use strict';
-angular.module('myApp').controller('TrainersCtrl', function($state){});
+
+//TODO: View all Trainers
+angular.module('myApp').controller('AllTrainersCtrl', function($http){
+	
+});

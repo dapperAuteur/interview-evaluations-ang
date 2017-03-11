@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Custom CSS -->
+<!-- <link rel="stylesheet" type="text/css" href="styles/design.css"> -->
+</head>
+<body>
+
+<h2>View a Person</h2>
+<br/>
+<div data-ng-controller="ViewPersonsCtrl as pers">
+  <input type="text" data-ng-model="input1" placeholder="First Name"/>
+  <input type="text" data-ng-model="input2" placeholder="Last Name"/>
+  <button data-ng-click="pers.getPerson(input1, input2)">Get Person by Name</button>
+  
+  <br/>
+
+  <div data-ng-show="pers.persons">
+    <div>
+    	<h3>{{pers.persons.content[0].firstName}} {{pers.persons.content[0].lastName}}</h3>
+    </div>
+    <div>
+    	<h4>{{pers.persons.content[0].personRole.title}}</h4>
+    </div>
+    
+  </div> <!-- end ng show -->
+  
+  <br/><br/>
+  
+  <input type="text" data-ng-model="input" placeholder="Id"/>
+  <button data-ng-click="pers.getPersonId(input)">Get Person by Id</button>
+  
+   <div data-ng-show="pers.personsId">
+    <div>
+    	<h3>{{pers.personsId.firstName}} {{pers.personsId.lastName}}</h3>
+    </div>
+    <div>
+    	<h4>{{pers.personsId.personRole.title}}</h4>
+    </div>
+   </div> <!-- end ng show -->
+   
+   <br/><br/><br/>   
+     
+</div> <!--  end ViewPersonsCtrl -->
+
+
+<div data-ng-controller="AllPersonsCtrl as pers">  
+   <button data-ng-click="pers.getAllPersons()">See All Persons</button>       
+   <div data-ng-show="pers.persons">  
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}}</h4>
+   </div>     
+   
+   <br/><br/>
+   
+</div> <!-- end AllTraineesCtrl -->
+
+
+<div data-ng-controller="CreateCtrl as create">
+
+	<h2>Create a person!</h2>
+	<input type="text" data-ng-model="first" placeholder="Enter first name">
+	<input type="text" data-ng-model="last" placeholder="Enter last name">
+	<select 
+			data-ng-init="selectedRole = create.roles[0]"
+			data-ng-model="selectedRole" 
+			data-ng-options="x.title for x in create.roles">
+	</select>
+	<button data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	
+	
+</div> <!-- end CreateCtrl -->
+
+
