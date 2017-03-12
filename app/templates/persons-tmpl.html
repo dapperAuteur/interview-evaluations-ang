@@ -12,7 +12,12 @@
 <div data-ng-controller="ViewPersonsCtrl as pers">
   <input type="text" data-ng-model="input1" placeholder="First Name"/>
   <input type="text" data-ng-model="input2" placeholder="Last Name"/>
-  <button data-ng-click="pers.getPerson(input1, input2)">Get Person by Name</button>
+  <select 
+			data-ng-init="selectedRole = pers.roles[0]"
+			data-ng-model="selectedRole" 
+			data-ng-options="x.title for x in pers.roles">
+	</select>
+  <button data-ng-click="pers.getPerson(input1, input2, selectedRole)">Get Person by Name</button>
   
   <br/>
 
