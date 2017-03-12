@@ -66,7 +66,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -83,7 +83,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data;
-		        console.log("success " + response.data);
+		        console.log("success " + response.data.content);
 
 		      }, function(response){
 		        console.log("fail " + response);
@@ -99,7 +99,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -116,7 +116,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -132,7 +132,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -148,7 +148,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -164,7 +164,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -178,7 +178,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success " + response.data);
 
 		      }, function(response){
@@ -188,6 +188,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 	  
   }
   
+  // this shouldnt be needed? ID is just a key in the database - no one actually "knows" them
   // View person by id:
   myData.getPersonId = function(input) {
 	  
@@ -208,6 +209,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
   
 });
 
+// taken care of in the "empty" search
 angular.module('myApp').controller('AllPersonsCtrl', function($http) {
 	
 	var allData = this;

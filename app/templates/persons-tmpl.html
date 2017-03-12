@@ -7,63 +7,14 @@
 </head>
 <body>
 
-<h2>View a Person</h2>
+<h2>Persons</h2>
 <br/>
-<div data-ng-controller="ViewPersonsCtrl as pers">
-  <input type="text" data-ng-model="input1" placeholder="First Name"/>
-  <input type="text" data-ng-model="input2" placeholder="Last Name"/>
-  <select 
-			data-ng-init="selectedRole = pers.roles[0]"
-			data-ng-model="selectedRole" 
-			data-ng-options="x.title for x in pers.roles">
-	</select>
-  <button data-ng-click="pers.getPerson(input1, input2, selectedRole)">Get Person by Name</button>
-  
-  <br/>
-
-  <div data-ng-show="pers.persons">
-    <div>
-    	<h3>{{pers.persons.content[0].firstName}} {{pers.persons.content[0].lastName}}</h3>
-    </div>
-    <div>
-    	<h4>{{pers.persons.content[0].personRole.title}}</h4>
-    </div>
-    
-  </div> <!-- end ng show -->
-  
-  <br/><br/>
-  
-  <input type="text" data-ng-model="input" placeholder="Id"/>
-  <button data-ng-click="pers.getPersonId(input)">Get Person by Id</button>
-  
-   <div data-ng-show="pers.personsId">
-    <div>
-    	<h3>{{pers.personsId.firstName}} {{pers.personsId.lastName}}</h3>
-    </div>
-    <div>
-    	<h4>{{pers.personsId.personRole.title}}</h4>
-    </div>
-   </div> <!-- end ng show -->
-   
-   <br/><br/><br/>   
-     
-</div> <!--  end ViewPersonsCtrl -->
 
 
-<div data-ng-controller="AllPersonsCtrl as pers">  
-   <button data-ng-click="pers.getAllPersons()">See All Persons</button>       
-   <div data-ng-show="pers.persons">  
-  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}}</h4>
-   </div>     
-   
-   <br/><br/>
-   
-</div> <!-- end AllTraineesCtrl -->
-
-
+<!-- create div -->
 <div data-ng-controller="CreateCtrl as create">
 
-	<h2>Create a person!</h2>
+	<h2>Create a person</h2>
 	<input type="text" data-ng-model="first" placeholder="Enter first name">
 	<input type="text" data-ng-model="last" placeholder="Enter last name">
 	<select 
@@ -75,5 +26,48 @@
 	
 	
 </div> <!-- end CreateCtrl -->
+
+
+<!-- Search for person div -->
+<h2>Search person</h2>
+<div data-ng-controller="ViewPersonsCtrl as pers">
+  <input type="text" data-ng-model="input1" placeholder="First Name"/>
+  <input type="text" data-ng-model="input2" placeholder="Last Name"/>
+  <select 
+			data-ng-init="selectedRole = pers.roles[0]"
+			data-ng-model="selectedRole" 
+			data-ng-options="x.title for x in pers.roles">
+	</select>
+  <button data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button>
+  
+  <br/>
+
+  <div data-ng-show="pers.persons">  
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}</h4>
+  </div> 
+</div>
+<!-- END search for person div -->  
+  <br/><br/>
+
+<!-- get person by id -- not needed? -->
+<!-- <div> -->
+<!--   <input type="text" data-ng-model="input" placeholder="Id"/> -->
+<!--   <button data-ng-click="pers.getPersonId(input)">Get Person by Id</button> -->
+  
+<!--    <div data-ng-show="pers.personsId"> -->
+<!--     <div> -->
+<!--     	<h3>{{pers.personsId.firstName}} {{pers.personsId.lastName}}</h3> -->
+<!--     </div> -->
+<!--     <div> -->
+<!--     	<h4>{{pers.personsId.personRole.title}}</h4> -->
+<!--     </div> -->
+<!--    </div> end ng show -->
+   
+<!--    <br/><br/><br/>    -->
+     
+<!-- </div> -->
+<!--END get person by id -- not needed? -->
+
+
 
 
