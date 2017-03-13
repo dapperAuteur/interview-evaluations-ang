@@ -7,6 +7,7 @@ var ie = angular.module('myApp', [
   //internal
   // 'dateDirective'
   // 'HomeCtrl',
+  
 
 ]);
   ie.config(function($stateProvider, $urlRouterProvider) {
@@ -22,17 +23,16 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/batch-tmpl.html',
         controller: 'BatchCtrl as batch'
       })
-      .state('evaluations', {
+      .state('evaluation', {
         url: '/evaluations',
-        templateUrl: 'app/templates/evaluations-tmpl.html',
-        controller: 'EvaluationsCtrl as evaluations'
+        templateUrl: 'app/templates/evaluations-tmpl.html'
       })
       .state('faq', {
         url: '/faq',
         templateUrl: 'app/templates/faq-tmpl.html',
         controller: 'FAQCtrl as faq'
       })
-      .state('questions', {
+      .state('question', {
         url: '/questions',
         templateUrl: 'app/templates/questions-tmpl.html',
         controller: 'QuestionsCtrl as questions'

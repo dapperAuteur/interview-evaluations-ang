@@ -1,1 +1,101 @@
 <h1>Evaluations Template</h1>
+
+<div data-ng-controller ="evaluationsCtrl as controller">
+    
+    <button data-ng-click = "showAdd = !showAdd">Add Eval</button>
+    
+    </br>
+    
+    <div ng-show="showAdd">
+        
+        <input type="number" data-ng-model="batchId"/>
+
+        <input type="number" data-ng-model="typeId"/>
+
+        <input type="number" data-ng-model="traineeId"/>
+
+        <input type="number" data-ng-model="weekNum"/>
+
+        <button data-ng-click = "controller.addNewEval(batchId, typeId, traineeId, weekNum)">Add New Eval</button>
+    
+    </div>
+    
+    </br>
+    
+    Eval ID </br>
+    <input type="number" data-ng-model="evalId"/>
+    
+    <button data-ng-click = "controller.getEvalById(evalId)">Get Eval by ID</button>
+    
+    </br></br>
+    
+    Trainee ID </br>
+    <input type="number" data-ng-model="trainee"/>
+        
+    <button data-ng-click = "controller.getTraineeEvals(trainee); showPage = true">Get Trainee Evals</button>      
+                
+    </br></br>
+    
+    <div style="display:inline-block">
+        <div style="display:inline-block">
+            Trainee ID </br>
+            <input type="number" data-ng-model="tId"/>
+        </div>
+        <div style="display:inline-block">
+            Week Number</br>
+            <input type="number" data-ng-model="weekNum"/>
+        </div>
+        <button data-ng-click = "controller.getTraineeEvalByWeek(tId,weekNum); showPage = true">Get Trainee Evals by Week</button>
+    </div>
+    
+    </br></br>
+    
+    <ul class = "list-inline">
+
+        <li data-ng-repeat="eval in controller.search | filter:search | startFrom:(controller.currentPage-1)*controller.itemsPerPage | limitTo:controller.itemsPerPage">
+
+           Eval ID: {{eval.id}}
+           Trainee ID: {{eval.trainee.id}}
+           Trainee Name: {{eval.trainee.firstName + " " +  eval.trainee.lastName}}
+           Max Knowledge Score: {{eval.maxKnowledgeScore}}
+           Questions: <ul class="visible-sm-block">
+               <li data-ng-repeat ="evalQuestion in eval.questions">
+                   Subject: {{evalQuestion.questionPool.subjectId.subject}} </br>
+                   Question: {{evalQuestion.questionPool.questionText}} </br>
+                   Knowledge Score: {{evalQuestion.communicationScore}} / {{evalQuestion.questionPool.maxKnowledgeScore}} </br>
+                   Communication Score: {{evalQuestion.knowledgeScore}} / {{evalQuestion.questionPool.maxCommunicationScore}} </br>
+                   Comments:  </br>
+                   <ul class ="visible-sm-block">
+                        <li data-ng-repeat = "comment in evalQuestion.comments">
+                            {{comment.commentText}} </br>
+                            </br>
+                         </li>
+                   </ul>
+                   </br>
+               </li>
+           </ul>
+           
+            <button data-ng-click = "showUpdate=true">Update Eval</button>
+
+            <div ng-show="showUpdate">
+
+                <input type="number" data-ng-model="batch_Id"/>
+
+                <input type="number" data-ng-model="type_Id"/>
+
+                <input type="number" data-ng-model="trainee_Id"/>
+
+                <input type="number" data-ng-model="week_Num"/>
+
+                <button data-ng-click = "controller.updateEval(eval.id, batch_Id, type_Id, trainee_Id, week_Num)">Submit Update</button>
+
+            </div>
+            
+            <button data-ng-click = "controller.deleteQuestion(eval.id)">Delete Eval</button>
+
+        </li>
+    </ul>
+    <ul ng-show = "showPage" uib-pagination total-items="controller.search.length" max-size = "controller.maxSize" class="pagination-sm"
+        items-per-page = "controller.itemsPerPage" ng-model = "controller.currentPage" ng-change="controller.pageChanged()">
+    </ul>
+</div>
