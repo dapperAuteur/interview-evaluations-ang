@@ -30,7 +30,9 @@
 
 <!-- Search for person div -->
 <h2>Search person</h2>
+<div>
 <div data-ng-controller="ViewPersonsCtrl as pers">
+
   <input type="text" data-ng-model="input1" placeholder="First Name"/>
   <input type="text" data-ng-model="input2" placeholder="Last Name"/>
   <select 
@@ -41,10 +43,24 @@
   <button data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button>
   
   <br/>
-
+<div data-ng-hide="pers.showUpdater">
   <div data-ng-show="pers.persons">  
-  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}</h4>
-  </div> 
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}<button data-ng-click="pers.updatePerson(p)">Update</button></h4>
+  </div>
+</div> 
+  
+  <div ng-cloak data-ng-show="pers.showUpdater">
+		<div><h1>Update!</h1></div>
+		<div><h1>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h1><button data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
+			<input type="text" data-ng-model="newFirstName" placeholder="{{pers.updatee.firstName}}"/>
+			<input type="text" data-ng-model="newLastName" placeholder="{{pers.updatee.lastName}}"/>
+			<select 
+				data-ng-init="selectedRole = pers.roles[0]"
+				data-ng-model="selectedRole" 
+				data-ng-options="x.title for x in pers.roles">
+			</select>
+			<button data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName)">Submit Update</button>
+	</div>
 </div>
 <!-- END search for person div -->  
   <br/><br/>

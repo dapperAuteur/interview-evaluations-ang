@@ -35,8 +35,7 @@ angular.module('myApp').controller('CreateCtrl', function($http) {
 				function(response) {
 					console.log("failure");
 				}
-			);
-				
+			);		
 	}
 	
 });
@@ -188,6 +187,65 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 	  
   }
   
+  myData.updatePerson = function(input){
+	  myData.showUpdater = true;
+	  myData.updatee = input;
+	  console.log(myData.updatee);
+  }
+  
+  myData.cancelUpdatePerson = function(){
+	  myData.showUpdater = false; 
+  }
+  
+  myData.submitUpdatePerson = function(updatee, newFirstName, newLastName, selectedRole){
+	  myData.uJson = updatee;
+	  console.log("inputPerson");
+	  console.log(updatee);
+	  console.log("uJson");
+	  console.log(myData.uJson);
+	  if(newFirstName){
+		  myData.uJson.firstName = newFirstName;
+	  }
+	  if(newLastName){
+		  myData.uJson.lastName = newLastName;
+	  }
+	  
+//	  if(selectedRole.title !== "Choose role"){
+//		  myData.uJson. = newFirstname;
+//	  }
+	  
+	  
+	  myData.updated = JSON.stringify(myData.uJson);
+	  console.log(myData.updated);
+	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
+	  .then(
+				function(response) {
+					console.log("success");
+				},
+				function(response) {
+					console.log("failure");
+				}
+			);		
+	}
+	  
+//	  $http({
+//	        method: "PUT",
+//	        url: "//localhost:8080/api/v1/persons"
+//	        
+//	      }).then(function(response){
+//	        console.log(response);
+//	        myData.personsId = response.data;
+//	        console.log("success " + response.data);
+//
+//	      }, function(response){
+//	        console.log("fail " + response);
+//	      });
+	  
+//  }
+  
+  
+  
+  
   // this shouldnt be needed? ID is just a key in the database - no one actually "knows" them
   // View person by id:
   myData.getPersonId = function(input) {
@@ -210,27 +268,27 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 });
 
 // taken care of in the "empty" search
-angular.module('myApp').controller('AllPersonsCtrl', function($http) {
-	
-	var allData = this;
-
-	allData.getAllPersons = function() {
-		
-		  console.log("all");
-		  $http({
-		        method: "GET",
-		        url: "//localhost:8080/api/v1/persons"
-		        
-		      }).then(function(response){
-		        console.log(response.data.content);
-		        allData.persons = response.data.content;	
-		        console.log("success " + response.data.content);
-
-		      }, function(response){
-		        console.log("fail " + response);
-		      });
-	  }
-	
-});
+//angular.module('myApp').controller('AllPersonsCtrl', function($http) {
+//	
+//	var allData = this;
+//
+//	allData.getAllPersons = function() {
+//		
+//		  console.log("all");
+//		  $http({
+//		        method: "GET",
+//		        url: "//localhost:8080/api/v1/persons"
+//		        
+//		      }).then(function(response){
+//		        console.log(response.data.content);
+//		        allData.persons = response.data.content;	
+//		        console.log("success " + response.data.content);
+//
+//		      }, function(response){
+//		        console.log("fail " + response);
+//		      });
+//	  }
+//	
+//});
 
 //TODO: Update and Delete 
