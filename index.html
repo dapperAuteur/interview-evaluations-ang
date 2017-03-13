@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Interview Evaluations</title>
-		<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link type="text/javascript" href="/scripts/bootstrap.js"></script>
 		<link rel="stylesheet" href="css/styles.css">
@@ -22,14 +22,15 @@
 	<!-- my scripts -->
 		<script type="text/javascript" src="./app/app.js"></script>
 		<script type="text/javascript" src="./app/directives/dateDirective.js"></script>
+	<script type="text/javascript" src="./app/controllers/personsCtrl.js"></script>	
+    <script type="text/javascript" src="./app/controllers/traineesCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/trainersCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/batchCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/evaluationsCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/faqCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/homeCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/questionsCtrl.js"></script>
     <script type="text/javascript" src="./app/controllers/subjectsCtrl.js"></script>
-    <script type="text/javascript" src="./app/controllers/traineesCtrl.js"></script>
-    <script type="text/javascript" src="./app/controllers/trainersCtrl.js"></script>
 
 
 	</head>
@@ -45,18 +46,17 @@
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-		      <a class="navbar-brand" data-ui-sref="home">Interview Evaluations</a>
+		      <a class="navbar-brand" style="color:white" data-ui-sref="home">Interview Evaluations</a>
 		    </div>
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav">
+		      	<li><a data-ui-sref="persons">Person</a></li>
 		        <li><a data-ui-sref="batch">Batch</a></li>
-						<li><a data-ui-sref="evaluations">Evaluations</a></li>
+				<li><a data-ui-sref="evaluations">Evaluations</a></li>
 		        <li><a data-ui-sref="faq">FAQ</a></li>
 		        <li><a data-ui-sref="questions">Questions</a></li>
 		        <li><a data-ui-sref="subjects">Subjects</a></li>
-		        <li><a data-ui-sref="trainees">Trainees</a></li>
-		        <li><a data-ui-sref="trainers">Trainers</a></li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
@@ -73,7 +73,7 @@
 
 
 
-		  <h1>{{2+3}}= 3 + 2</h1>
+<!-- 		  <h1>{{2+3}}= 3 + 2</h1> -->
 		</div>
 
 
