@@ -1,6 +1,13 @@
 'use strict';
-var myFaq = angular.module('myApp').controller('FAQCtrl', function($state){
-  myFaq.projectDesc = false;
+angular.module('myApp').controller('FAQCtrl', function($state){
+	var myFaq=this;
+	myFaq.projectDesc = false;
+	
+	myFaq.togProjDesc = function(){
+		myFaq.projectDesc = !myFaq.projectDesc;
+	}
+  
+  
 });
 
 // var showApp = angular.module('showApp', [])
