@@ -243,20 +243,18 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
   
   // big long function to delete
   
-  // THIS DOES NOT WORK!
+  // THIS WORKS BUT THE RESPONSE ALWAYS LEADS TO FAIL!
   myData.deletePerson = function(del){
-	  myData.uJson = del;
-	  myData.deletee = JSON.stringify(myData.uJson);
-	  console.log(myData.updated);
-	  $http.delete("//localhost:8080/api/v1/persons", myData.deletee)
-	  .then(
-			  function(response) {
-				  console.log("success");
-				  myData.showUpdater=false;
-			  },
-			  function(response) {
-				  myData.alert("failure to update");
-			  }
-	  );		
+	  myData.delId = del.id;
+	  console.log(myData.delId); 
+	  $http({
+	        method: "DELETE",
+//	        ?roleName=trainer
+	        url: "//localhost:8080/api/v1/persons/" + myData.delId
+	      }).then(function(response){
+	        console.log(response);
+	      }, function(response){
+	        console.log("fail");
+	      });		
   }
 });
