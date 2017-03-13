@@ -1,1 +1,56 @@
-<h1>Batch Template</h1>
+
+
+<div class="row">
+
+	<div class="col-md-12" data-ng-controller="BatchCtrl as batch">
+
+
+		
+
+		</div>
+
+		<div data-ng-show="batch.batches">
+			<div>{{batch.batches.name}}</div>
+			<!-- <img alt="Pokemon Image" data-ng-src="{{train.pokemon.sprites.front_default}}"/> -->
+		</div>
+
+
+	</div>
+</div>
+<div class="row" ng-controller="BatchCtrl as batch">
+	<div class="col-md-12" ng-controller="TabsDemoCtrl">
+		<uib-tabset type="pills"> <uib-tab heading="Get Batch"
+			classes="btn-sm">
+		<div class="col-md-3">
+			<input type="text" data-ng-model="input" />
+			<button class="btn btn-info btn-xs"
+				data-ng-click="batch.getBatches(input)">Get Batch</button>
+		</div>
+		</uib-tab> <uib-tab heading="Create Batch" classes="btn-sm">
+		<div class="col-md-3">
+			<form ng-submit="batch.postBatch()">
+				<input placeholder="enter batch name" type="text"
+					ng-model="batch.newBatchInput" />
+				<button class="btn btn-info btn-xs" type="submit">Create
+					Batch</button>
+			</form>
+		</div>
+		</uib-tab> <uib-tab heading="Update Batch" classes="btn-sm">
+		<div class="col-md-3">
+			<form ng-submit="batch.updateBatch()">
+				<input placeholder="enter new batch name" type="text"
+					ng-model="batch.newBatchNameInput" /> <input
+					placeholder="enter batch ID" type="text"
+					ng-model="batch.batchIdInput" />
+				<button class="btn btn-info btn-xs" type="submit">Update
+					Batch</button>
+			</form>
+			</div>
+		</uib-tab>
+		
+		<uib-tab heading="Delete Batch" class="btn-sm">Tab 4
+		content</uib-tab> </uib-tabset>
+	</div>
+</div>
+
+
