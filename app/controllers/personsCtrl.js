@@ -1,9 +1,10 @@
 'use strict';
 
 // Create a person:
-angular.module('myApp').controller('CreateCtrl', function($http) {
+angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 	
 	var myData = this;
+	myData.showCreator = false;
 	
 	myData.roles =  [
 		{title : "Choose role", id : "0"},
@@ -36,11 +37,16 @@ angular.module('myApp').controller('CreateCtrl', function($http) {
 					myData.createdName = first + " " + last;
 					
 					myData.showCreator = true;
+					$timeout(myData.seFalseShowCreator, 1000);
 				},
 				function(response) {
 					console.log("failure");
 				}
 			);		
+	}
+	
+	myData.seFalseShowCreator = function(){
+		myData.showCreator = false;
 	}
 	
 });
