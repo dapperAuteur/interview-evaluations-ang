@@ -210,9 +210,22 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		  myData.uJson.lastName = newLastName;
 	  }
 	  
-//	  if(selectedRole.title !== "Choose role"){
-//		  myData.uJson. = newFirstname;
-//	  }
+	  console.log(selectedRole.title);
+	  if(selectedRole.title !== "Choose role"){
+		  
+		if(selectedRole.title === "Trainee"){
+			myData.uJson.personRole.id = 1;
+			myData.uJson.personRole.title = "trainee";
+		} else if(selectedRole.title === "Trainer"){
+			myData.uJson.personRole.id = 2;
+			myData.uJson.personRole.title = "trainer";
+		} else if(selectedRole.title === "QC"){
+			myData.uJson.personRole.id = 3;
+			myData.uJson.personRole.title = "qc";
+		}   
+	  
+//		  myData.uJson. = newFirstname;	
+	  }
 	  
 	  
 	  myData.updated = JSON.stringify(myData.uJson);
@@ -227,21 +240,6 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 				}
 			);		
 	}
-	  
-//	  $http({
-//	        method: "PUT",
-//	        url: "//localhost:8080/api/v1/persons"
-//	        
-//	      }).then(function(response){
-//	        console.log(response);
-//	        myData.personsId = response.data;
-//	        console.log("success " + response.data);
-//
-//	      }, function(response){
-//	        console.log("fail " + response);
-//	      });
-	  
-//  }
   
   
   
