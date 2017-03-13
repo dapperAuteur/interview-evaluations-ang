@@ -71,10 +71,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 !== 'undefined' && typeof input2 !== 'undefined' && role.title === "Choose role") {
@@ -87,10 +87,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data;
-		        console.log("success " + response.data.content);
+		        console.log("success search " + response.data.content);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 !== 'undefined' && typeof input2 === 'undefined' && role.title !== "Choose role") {
@@ -104,10 +104,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 === 'undefined' && typeof input2 !== 'undefined' && role.title !== "Choose role") {
@@ -121,10 +121,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search" + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 !== 'undefined' && typeof input2 === 'undefined' && role.title === "Choose role") {
@@ -137,10 +137,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 === 'undefined' && typeof input2 !== 'undefined' && role.title === "Choose role") {
@@ -153,10 +153,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 		  
 	  } else if (typeof input1 === 'undefined' && typeof input2 === 'undefined' && role.title !== "Choose role"){
@@ -169,10 +169,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 	  }else if (typeof input1 === 'undefined' && typeof input2 === 'undefined' && role.title === "Choose role"){
 		  console.log("ALL SEARCH");
@@ -183,10 +183,10 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		      }).then(function(response){
 		        console.log(response);
 		        myData.persons = response.data.content;
-		        console.log("success " + response.data);
+		        console.log("success search " + response.data);
 
 		      }, function(response){
-		        console.log("fail " + response);
+		        console.log("fail search " + response);
 		      });
 	  }
 	  
@@ -237,7 +237,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
 	  .then(
 				function(response) {
-					console.log("success");
+					console.log("success update");
 					myData.showUpdater=false;
 				},
 				function(response) {
@@ -266,5 +266,6 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 				
 			}
 		);	
+
   }
 });
