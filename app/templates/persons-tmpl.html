@@ -45,7 +45,7 @@
   <br/>
 <div data-ng-hide="pers.showUpdater">
   <div data-ng-show="pers.persons">  
-  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}<button data-ng-click="pers.updatePerson(p)">Update</button></h4>
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}<button data-ng-click="pers.updatePerson(p)">Update</button><button data-ng-click="pers.deletePerson(p)">Delete</button></h4>
   </div>
 </div> 
   
