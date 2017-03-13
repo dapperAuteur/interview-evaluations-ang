@@ -30,7 +30,12 @@ angular.module('myApp').controller('CreateCtrl', function($http) {
 		$http.post("//localhost:8080/api/v1/persons",myJSON)
 			.then(
 				function(response) {
+					console.log(response);
 					console.log("success");
+					
+					myData.createdName = first + " " + last;
+					
+					myData.showCreator = true;
 				},
 				function(response) {
 					console.log("failure");
@@ -243,18 +248,23 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
   
   // big long function to delete
   
-  // THIS WORKS BUT THE RESPONSE ALWAYS LEADS TO FAIL!
   myData.deletePerson = function(del){
 	  myData.delId = del.id;
-	  console.log(myData.delId); 
-	  $http({
-	        method: "DELETE",
-//	        ?roleName=trainer
-	        url: "//localhost:8080/api/v1/persons/" + myData.delId
-	      }).then(function(response){
-	        console.log(response);
-	      }, function(response){
-	        console.log("fail");
-	      });		
+	  
+	  $http.delete("//localhost:8080/api/v1/persons/" + myData.delId)
+	  	.then(
+			function(response) {
+				console.log("success " + myData.delId);
+				
+				myData.deletedName = del.firstName + " " + del.lastName;
+				
+				myData.showDeleter = true;
+				
+			},
+			function(response) {
+				console.log("fail " + myData.delId); 
+				
+			}
+		);	
   }
 });

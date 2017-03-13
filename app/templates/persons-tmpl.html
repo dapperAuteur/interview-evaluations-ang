@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Custom CSS -->
-<!-- <link rel="stylesheet" type="text/css" href="styles/design.css"> -->
+<link rel="stylesheet" type="text/css" href="css/persons.css">
 </head>
 <body>
 
@@ -22,15 +22,19 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in create.roles">
 	</select>
-	<button data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	<button class = "createBtn" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
 	
+	<br/>
+    <div data-ng-cloak data-ng-show="create.showCreator">
+    	<h4>{{create.createdName}} was created</h4>
+    </div>
 	
 </div> <!-- end CreateCtrl -->
 
 
 <!-- Search for person div -->
 <h2>Search person</h2>
-<div>
+
 <div data-ng-controller="ViewPersonsCtrl as pers">
 
   <input type="text" data-ng-model="input1" placeholder="First Name"/>
@@ -40,16 +44,22 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in pers.roles">
 	</select>
-  <button data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button>
+    <button class = "searchBtn" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
   
-  <br/>
+  <br/><br/>
+  
 <div data-ng-hide="pers.showUpdater">
   <div data-ng-show="pers.persons">  
-  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}} {{p.personRole.title}}<button data-ng-click="pers.updatePerson(p)">Update</button><button data-ng-click="pers.deletePerson(p)">Delete</button></h4>
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}}, {{p.personRole.title}} <button class = "deleteBtn" data-ng-click="pers.deletePerson(p)">Delete</button> <button class = "updateBtn" data-ng-click="pers.updatePerson(p)">Update</button></h4>
   </div>
 </div> 
-  
-  <div ng-cloak data-ng-show="pers.showUpdater">
+    
+    <br/>
+    <div data-ng-cloak data-ng-show="pers.showDeleter">
+    	<h4>{{pers.deletedName}} was deleted</h4>
+    </div>
+    
+ 	<div data-ng-cloak data-ng-show="pers.showUpdater">
 		<div><h1>Update!</h1></div>
 		<div><h1>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h1><button data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
 			<input type="text" data-ng-model="newFirstName" placeholder="{{pers.updatee.firstName}}"/>

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+
+.createBtn {
+
+	float : right;
+}
+
+.searchBtn {
+	
+	float : right;
+}
+
+.updateBtn {
+
+	float : right;
+}
+
+.deleteBtn {
+	
+	float : right;
+}
