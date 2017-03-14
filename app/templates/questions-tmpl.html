@@ -2,84 +2,134 @@
 
 <div class = "container-fluid" data-ng-controller ="questionsCtrl as controller">
     
-    <div class ="container-fluid">
-        
+    <div>
         <button data-ng-click = "showAdd = ! showAdd">Add Question</button>
-        
     </div>
     
-    <div class ="container-fluid" ng-show="showAdd">
+    <div style="display:inline-block" ng-show="showAdd">
+        </br>
+        <div style="display:inline-block">
+            Max Communication Score </br>
+            <input type="number" data-ng-model="comInput"/>
+        </div>
         
-        <input type="number" data-ng-model="comInput"/>
-
-        <input type="number" data-ng-model="knowInput"/>
-
-        <input type="text" data-ng-model="textInput"/>
-
-        <input type="text" data-ng-model="subSelect"/>
-
-        <button data-ng-click = "controller.addNewQuestion(comInput, knowInput, textInput, subSelect)">Add New Question</button>
-    
+        <div style="display:inline-block">
+            Max Knowledge Score </br>
+            <input type="number" data-ng-model="knowInput"/>
+        </div>
+        
+        <div style="display:inline-block">
+            Question Text </br>
+            <input type="text" data-ng-model="textInput"/>
+        </div>
+        
+        <div style="display:inline-block">
+            Subject ID </br>
+            <input type="number" data-ng-model="subSelect"/>
+        </div>
+        
+        <div style="display:inline-block">
+            <button data-ng-click = "controller.addNewQuestion(comInput, knowInput, textInput, subSelect)">Add New Question</button>
+        </div>
+        </br></br>
     </div>
     
-    <div class ="container-fluid">
+    </br>
     
-        <button data-ng-click = "controller.getQuestions()">Get All Questions</button>
+    <button data-ng-click = "controller.getQuestions()">Get All Questions</button>
+    
+    </br></br>
 
-    </div>
+    Subject </br>
+    <input type="text" data-ng-model="subInput"/>
+
+    <button data-ng-click = "controller.getQuestions(subInput)">Get Questions by Subject</button>      
+          
+    </br></br>
     
-    <div class ="container-fluid">
+    <div style="display:inline-block">
+        <div style="display:inline-block">
+            Question Text </br>
+            <input type="text" data-ng-model="contInput"/>
+        </div>
+            
+        <div style="display:inline-block">
+            Subject </br>
+            <input type="text" data-ng-model="subDrop"/>
+        </div>
         
-        <input type="text" data-ng-model="subInput"/>
-
-        <button data-ng-click = "controller.getQuestions(subInput)">Get Questions by Subject</button>      
-                
-    </div>
-    
-    <div class ="container-fluid">
-        
-        <input type="text" data-ng-model="contInput"/>
-
-        <input type="text" data-ng-model="subDrop" ng-init="subDrop = 'all'"/>
-
         <button data-ng-click = "controller.searchForQuestions(contInput,subDrop)">Get Question by Text</button>
-	   
     </div>
+    
+    </br></br>
+    
+    <div data-ng-repeat="question in controller.search">
+
+        Question ID: {{question.id}} </br>
+        Max Communication Score: {{question.maxCommunicationScore}} </br>
+        Max Knowledge Score: {{question.maxKnowledgeScore}} </br>
+        Question Text: {{question.questionText}} </br>
+        Subject: {{question.subject.subject}} </br>
+        Times Used: {{question.useCount}} </br>
+
+        <div>
+            <button data-ng-click = "showUpdate = ! showUpdate">Update Question</button>
+        </div>
         
-    <div class ="container-fluid">
-        <ul class = "list-inline">
+        <div ng-show="showUpdate" style="display:inline-block">
+            <div style="display:inline-block">
+                Max Communication Score </br>
+                <input type="number" data-ng-model="comScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Max Knowledge Score </br>
+                <input type="number" data-ng-model="knowScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Question Text </br>
+                <input type="text" data-ng-model="textField"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Subject ID </br>
+                <input type="text" data-ng-model="subRot"/>
+            </div>
+            
+            <div style="display:inline-block">
+                <button data-ng-click = "controller.updateQuestion(question.id,comScore,knowScore,textField,subRot)">Submit Update</button>
+            </div>
+            
+            </br></br>
+         </div>
 
-            <li data-ng-repeat="question in controller.search | filter:search | startFrom:(controller.currentPage-1)*controller.itemsPerPage | limitTo:controller.itemsPerPage">
-
-               Question ID: {{question.id}}
-               Max Communication Score: {{question.maxCommunicationScore}}
-               Max Knowledge Score: {{question.maxKnowledgeScore}}
-               Question Text: {{question.questionText}}
-               Subject: {{question.subjectId.subject}}
-               Times Used: {{question.useCount}}
-
-                <button data-ng-click = "showUpdate = ! showUpdate">Update Question</button>
-
-                <div ng-show="showUpdate">
-
-                    <input type="number" data-ng-model="comScore"/>
-
-                    <input type="number" data-ng-model="knowScore"/>
-
-                    <input type="text" data-ng-model="textField"/>
-
-                    <input type="text" data-ng-model="subRot"/>
-
-                    <button data-ng-click = "controller.updateQuestion(question.id,comScore,knowScore,textField,subRot)">Submit Update</button>
-
-                </div>
-
-                <button data-ng-click = "controller.deleteQuestion(question.id)">Delete Question</button>
-
-            </li>
-        </ul>
-        <ul uib-pagination total-items="controller.search.length" max-size = "controller.maxSize" class="pagination-sm"
-            items-per-page = "controller.itemsPerPage" ng-model = "controller.currentPage" ng-change="controller.pageChanged()">
-        </ul>
+        <div>
+            <button data-ng-click = "controller.deleteQuestion(question.id)">Delete Question</button>
+            </br>
+        </div>
+        
+        <div style="display:inline-block">
+            <div style="display:inline-block">
+                Eval ID </br>
+                <input type="number" data-ng-model="evalId"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Communication Score </br>
+                <input type ="number" data-ng-model="comScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Knowledge Score </br>
+                <input type ="number" data-ng-model="knoScore"/>                
+            </div>
+            
+            <div style="display:inline-block">
+                <button data-ng-click="controller.addToEval(question,evalId,comScore,knoScore)">Add Question to Eval</button>
+            </div>
+        </div>
+        
+        </br></br>
     </div>
 </div>

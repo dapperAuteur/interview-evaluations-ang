@@ -12,10 +12,7 @@ angular.module("myApp").filter('startFrom', function () {
 
 angular.module("myApp").controller("evaluationsCtrl",['evaluationsService', '$log','$scope', function(evaluationsService, $log, $scope){
     var evalData = this;
-    
-    evalData.showAdd = false;
-    evalData.showUpdate= false;
-    
+
     evalData.search=[];
     evalData.delete;
     
@@ -28,26 +25,49 @@ angular.module("myApp").controller("evaluationsCtrl",['evaluationsService', '$lo
      };
      
      evalData.getEvalById=(function(input){
-         evalData.search = evaluationsService.getEvalById(input);
+         var promise = evaluationsService.getEvalById(input);
+         promise.then(function(result){
+             evalData.search = [result];
+            $log.log(evalData.search);
+         });
      });
     
     evalData.getTraineeEvals=(function(input){
-        evalData.search = evaluationsService.getTraineeEvaluations(input);
+        var promise = evaluationsService.getTraineeEvaluations(input);
+        promise.then(function(result){
+            evalData.search = result;
+            $log.log(evalData.search);
+        });
     });
     
     evalData.getTraineeEvalByWeek=(function(id, week){
-        evalData.search = evaluationsService.getTraineeEvalByWeek(id, week);
+        var promise = evaluationsService.getTraineeEvalByWeek(id, week);
+        promise.then(function(result){
+            evalData.search = result;
+            $log.log(evalData.search);
+        });
     });
     
     evalData.addNewEval=(function(batchId, typeId, traineeId, weekNum){
-        evalData.search = evaluationsService.addEval(batchId, typeId, traineeId, weekNum);
+        var promise = evaluationsService.addEval(batchId, typeId, traineeId, weekNum);
+        promise.then(function(result){
+            var endResult =  "Evaluations " +result.id+ " - ADDED";
+            evalData.search = [endResult];
+            $log.log(evalData.search);
+        });
     });
     
     evalData.updateEval=(function(id, batchId, typeId, traineeId, weekNum){
-        evalData.search = evaluationsService.updateEval(id, batchId, typeId, traineeId, weekNum);        
+        var promise = evaluationsService.updateEval(id, batchId, typeId, traineeId, weekNum);        
+        promise.then(function(result){
+            evalData.search = [result];
+            $log.log(evalData.search);
+        });
     });
     
     evalData.deleteEval=(function(id){
+        console.log("Deleting");
         evalData.delete = evaluationsService.deleteEval(id);
+        console.log(evalData.delete);
     });
 }]);

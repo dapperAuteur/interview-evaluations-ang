@@ -338,20 +338,20 @@ iframe.example {
   width: 15%;
   float: right;
 }
-
+/*
 @supports ((column-count: 2) or (-moz-column-count: 2) or (-ms-column-count: 2) or (-webkit-column-count: 2)) {
   .search-results-group.col-group-api .search-results {
     -moz-column-count: 2;
     -ms-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2;
-    /* Prevent bullets in the second column from being hidden in Chrome and IE */
+    /* Prevent bullets in the second column from being hidden in Chrome and IE *//*
     -webkit-column-gap: 2em;
     -ms-column-gap: 2em;
     column-gap: 2em;
   }
 }
-
+*/
 .search-results-group .search-result {
   word-wrap: break-word;
   -webkit-hyphens: auto;
@@ -385,12 +385,14 @@ iframe.example {
   padding-left: 12px;
 }
 
+/*
 @supports ((column-count: 2) or (-moz-column-count: 2) or (-ms-column-count: 2) or (-webkit-column-count: 2)) {
   .search-results-group.col-group-api .search-result {
     width: auto;
     display: list-item;
   }
 }
+*/
 
 .search-close {
   position: absolute;
@@ -809,6 +811,7 @@ ul.events > li {
     content: "";
   }
 
+  /*
   @supports ((column-count: 2) or (-moz-column-count: 2) or (-ms-column-count: 2) or (-webkit-column-count: 2)) {
     .search-results-group .search-result {
       display: list-item !important;
@@ -818,11 +821,11 @@ ul.events > li {
       content: "";
     }
   }
-
+*/
   #wrapper {
     padding-bottom: 0px;
   }
-}
+
 
 iframe[name="example-anchoringExample"] {
   height: 400px;

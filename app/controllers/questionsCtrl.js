@@ -10,7 +10,7 @@ angular.module("myApp").filter('startFrom', function () {
     };
 });
 
-angular.module('myApp').controller('QuestionsCtrl', function(questionsService,$log){
+angular.module('myApp').controller('questionsCtrl',['questionsService', '$log', function(questionsService,$log){
     var questionData = this;
 
     questionData.search = [];
@@ -23,25 +23,49 @@ angular.module('myApp').controller('QuestionsCtrl', function(questionsService,$l
      questionData.pageChanged = function() {
          $log.log('Page changed to: ' + questionData.currentPage);
      };
+     
+     questionData.addToEval=(function(question, evalId, comScore, knoScore){
+         var promise = questionsService.addQuestionToEval(question,evalId,comScore,knoScore);
+         promise.then(function(result){
+             questionData.search = [result];
+             $log.log(questionData.search);
+         });
+     });
 
     questionData.getQuestions=(function(input){
-        questionData.search = questionsService.getQuestions(input);
+        var promise = questionsService.getQuestions(input);
+        promise.then(function(result){
+            questionData.search = result;
+            $log.log(questionData.search);
+        });
     });
 
     questionData.searchForQuestions = (function(input1,input2){
-        questionData.search = questionsService.searchForQuestions(input1,input2);
+        var promise = questionsService.searchForQuestions(input1,input2);
+        promise.then(function(result){
+            questionData.search = result;
+            $log.log(questionData.search);
+        });
     });
 
     questionData.addNewQuestion = (function(maxCS, maxKS, qText, subjectId){
-        questionData.search = questionsService.addNewQuestion(maxCS, maxKS, qText, subjectId);
+        var promise = questionsService.addNewQuestion(maxCS, maxKS, qText, subjectId);
+        promise.then(function(result){
+            var endResult = "Question: " +result.id+ " -ADDED";
+            questionData.search = [endResult];
+            $log.log(questionData.search);
+        });
+    });
+
+    questionData.updateQuestion = (function(id, maxCS, maxKS, qText, subjectId){
+        var promise = questionsService.updateQuestion(id, maxCS, maxKS, qText, subjectId);
+        promise.then(function(result){
+            questionData.search = [result];
+            $log.log(questionData.search);            
+        });
     });
 
     questionData.deleteQuestion = (function(id){
         questionData.delete = questionsService.deleteQuestion(id);
-    });
-
-    questionData.updateQuestion = (function(id, maxCS, maxKS, qText, subjectId){
-        questionData.search = questionsService.updateQuestion(id, maxCS, maxKS, qText, subjectId);
-    });
-    
-});
+    });    
+}]);

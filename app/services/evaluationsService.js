@@ -1,118 +1,136 @@
 'use strict';
-angular.module('myApp').service('evaluationsService', function($http){
-    
+angular.module('myApp').service('evaluationsService', function($http, $q){
+
     this.getEvalById=(function(input){
-        var localData;
-        var evaluations = [];
+        var deferred = $q.defer();
         $http.get("//localhost:8080/api/v1/evaluations/"+input+"").then(function(response){
-            localData=response;
-            for(i=0;i<localData.content.length;i++){
-                evaluations.push(localData.content[i]);
-            }
-            return evaluations;
+            deferred.resolve(response.data);
         });        
+        return deferred.promise;
     });
-    
+
     this.getTraineeEvaluations=(function(input){
         var localData;
         var evaluations = [];
+        var deferred = $q.defer();
         $http.get("//localhost:8080/api/v1/evaluations/trainees/"+input+"").then(function(response){
             localData=response;
-            for(i=0;i<localData.content.length;i++){
-                evaluations.push(localData.content[i]);
+            for(var i=0; i<localData.data.content.length; i++){
+                evaluations.push(localData.data.content[i]);
             }
-            return evaluations;
-        });         
+            deferred.resolve(evaluations);
+        });        
+        return deferred.promise;
     });
-    
-    
+
+
     this.getTraineeEvalByWeek=(function(id,week){
         var localData;
         var evaluations = [];
+        var deferred = $q.defer();
         $http.get("//localhost:8080/api/v1/evaluations/trainees/"+id+"/week/"+week+"").then(function(response){
             localData=response;
-            for(i=0;i<localData.content.length;i++){
-                evaluations.push(localData.content[i]);
-            }
-            return evaluations;
+            for(var i=0;i<localData.data.content.length;i++){
+                evaluations.push(localData.data.content[i]);
+                }
+            deferred.resolve(evaluations);
         });        
+        return deferred.promise;
     });
-    
-    
+
+
     this.addEval=(function(batchId, typeId, traineeId, weekNum){
         var localData;
-        
+        var deferred = $q.defer();
+
         var data = {
-            batch : {
-                id : batchId
-            },
-            evalType : {
-                id : typeId   
-            },
-           trainee : {
-               id : traineeId
-           },
-           week : weekNum
+        batch : {
+            id : batchId
+        },
+        evalType : {
+            id : typeId   
+        },
+        trainee : {
+            id : traineeId
+        },
+            week : weekNum
         };
-        
+
         $http.post("//localhost:8080/api/v1/evaluations", data).then(function(response){
-            localData = response;
-            return "Evaluations " +localData.id+ " - ADDED";
+            localData = response.data;
+            deferred.resolve(localData);
         });
+        return deferred.promise;
     });
-    
-    
+
+
     this.updateEval=(function(id, batchId, evalTypeId, traineeId, weekNum){
         var localData;
-        
+        var deferred = $q.defer();
+
+        var promise = this.getEvalById(id);
+
         var l_batchId;
         var l_evalTypeId;
         var l_traineeId;
         var l_weekNum;
-        
-         if(batchId.toString().length !== 0){
-            l_batchId = batchId;
-        }
 
-        if(evalTypeId.toString().length !== 0){
-            l_evalTypeId = evalTypeId;
-        }
+        promise.then(function(result){
 
-        if(traineeId.length !== 0){
-            l_traineeId = traineeId;
-        }
+            var evaluation = result;
+            console.log(evaluation);
+            console.log(batchId);
 
-        if(weekNum.toString().length !== 0){
-            l_weekNum = weekNum;
-        }
-        
-        var data = {
+            if(batchId){
+                l_batchId = batchId;
+            } else {
+                l_batchId = evaluation.batch.id;
+            }
+
+            if(evalTypeId){
+                l_evalTypeId = evalTypeId;
+            } else {
+                l_evalTypeId = evaluation.evalType.id;
+            }
+
+            if(traineeId){
+                l_traineeId = traineeId;
+            } else {
+                l_traineeId = evaluation.trainee.id;
+            }
+
+            if(weekNum){
+                l_weekNum = weekNum;
+            } else {
+                l_weekNum = evaluation.week;
+            }
+
+            var data = {
             batch : {
-                id : l_batchId
+               id : l_batchId
             },
             evalType : {
-                id : l_evalTypeId   
+               id : l_evalTypeId   
             },
-           trainee : {
-               id : l_traineeId
-           },
-           week : l_weekNum
-        };
-        
-        $http.put("//localhost:8080/api/v1/evaluations/update/"+id+"", data).then(function(response){
-            localData = response;
-            return localData;
+            trainee : {
+                id : l_traineeId
+            },
+               week : l_weekNum
+            };
+
+            $http.put("//localhost:8080/api/v1/evaluations/"+id+"", data).then(function(response){
+                localData = response.data;
+                deferred.resolve(localData);
+            });   
         });
-        
+        return deferred.promise;    
     });
-    
-    
+
+
     this.deleteEval=(function(id){
-         $http.delete("//localhost:8080/api/v1/evaluations/delete/"+id+"").then(function(){
+        $http.delete("//localhost:8080/api/v1/evaluations/"+id+"").then(function(){
+            console.log("Evaluation: "+id+" - DELETED");
             return "Evaluation: "+id+" - DELETED";
-        }).error(function(status){
-            alert("Error -  No Evaluation with ID : "+id+" found in database");
-            return status;
-        });        
+        });      
     });
 });
