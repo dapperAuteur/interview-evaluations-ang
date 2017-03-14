@@ -1,5 +1,4 @@
 body,
-
 html {
 
 	min-height: 100%;
@@ -12,7 +11,10 @@ html {
 
 }
 
-
+.tableButton {
+	margin-left: 7px;
+	margin-right: 7px;
+}
 
 body {
 	/*background-image: url(/images/2016-10-13_1402.png);

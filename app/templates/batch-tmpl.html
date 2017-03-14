@@ -1,1 +1,73 @@
-<h1>Batch Template</h1>
+
+
+<div class="row">
+
+
+
+	<div data-ng-show="batch.batches">
+		<div>{{batch.batches.name}}</div>
+	</div>
+
+
+</div>
+</div>
+<div class="row" ng-controller="getAllBatches as getAll">
+	<div class="col-md-12" ng-controller="TabsDemoCtrl as tabctrl">
+		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
+			classes="btn-sm">
+		<div class="col-md-3">
+			<form>
+				batch name:<input placeholder="batch name" type="text"
+					ng-model="batch.newBatchInput" />
+				<div ng-controller="addPersonController as addPerson">
+					<fieldset data-ng-repeat="choice in addPerson.choices">
+						first name: <input type="text" ng-model="choice.firstName" name=""
+							placeholder="first name">last name: <input type="text"
+							ng-model="choice.lastName" name="" placeholder="last name">
+						
+						<button class="remove" ng-show="$last"
+							ng-click="addPerson.removeChoice()">-</button>
+					</fieldset>
+					<button class="addfields" ng-click="addPerson.addNewChoice()">Add
+						person</button>
+				</div>
+				<button ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
+					Batch</button>
+			</form>
+		</div>
+		</uib-tab>
+		<uib-tab ng-click="tabctrl.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<div class="col-md-5">
+			<form ng-submit="batch.updateBatch()">
+				<input placeholder="enter new batch name" type="text"
+					ng-model="batch.newBatchNameInput" /> <input
+					placeholder="enter batch ID" type="text"
+					ng-model="batch.batchIdInput" />
+				<button class="btn btn-info btn-xs" type="submit">Update
+					Batch</button>
+			</form>
+			
+			<table class="table table-bordered table-hover table-condensed">
+			<thead>
+			<tr>
+			<th style="text-align:center">Batch ID</th>
+			<th style="text-align:center">Batch Name</th>
+			<th style="text-align:center">Action</th>
+			</tr>
+			</thead>
+			<tbody >
+			<tr ng-repeat="b in tabctrl.newData" align="center">
+			<td>{{b.id}}</td>
+			<td>{{b.name}}</td>
+			<td><button class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>
+			</tr>
+			</tbody>
+			</table>
+		
+		</div>
+		</uib-tab> </uib-tabset>
+		
+	</div>
+</div>
+
+
