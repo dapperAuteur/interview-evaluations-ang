@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Custom CSS -->
+<link rel="stylesheet" type="text/css" href="css/persons.css">
+</head>
+<body>
+
+<h2>Persons</h2>
+<br/>
+
+
+<!-- create div -->
+<div data-ng-controller="CreateCtrl as create">
+
+	<h2>Create a person</h2>
+	<input type="text" data-ng-model="first" placeholder="Enter first name">
+	<input type="text" data-ng-model="last" placeholder="Enter last name">
+	<select 
+			data-ng-init="selectedRole = create.roles[0]"
+			data-ng-model="selectedRole" 
+			data-ng-options="x.title for x in create.roles">
+	</select>
+	<button class = "createBtn" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	
+	<br/>
+    <div data-ng-cloak data-ng-show="create.showCreator">
+    	<h4>{{create.createdName}} was created</h4>
+    </div>
+	
+</div> <!-- end CreateCtrl -->
+
+
+<!-- Search for person div -->
+<h2>Search person</h2>
+
+<div data-ng-controller="ViewPersonsCtrl as pers">
+
+  <input type="text" data-ng-model="input1" placeholder="First Name"/>
+  <input type="text" data-ng-model="input2" placeholder="Last Name"/>
+  <select 
+			data-ng-init="selectedRole = pers.roles[0]"
+			data-ng-model="selectedRole" 
+			data-ng-options="x.title for x in pers.roles">
+	</select>
+    <button class = "searchBtn" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
+  
+  <br/><br/>
+  
+<div data-ng-hide="pers.showUpdater">
+  <div data-ng-show="pers.persons">  
+  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}}, {{p.personRole.title}} <button class = "deleteBtn" data-ng-click="pers.deletePerson(p)">Delete</button> <button class = "updateBtn" data-ng-click="pers.updatePerson(p)">Update</button></h4>
+  </div>
+</div> 
+    
+    <br/>
+    <div data-ng-cloak data-ng-show="pers.showDeleter">
+    	<h4>{{pers.deletedName}} was deleted</h4>
+    </div>
+    
+ 	<div data-ng-cloak data-ng-show="pers.showUpdater">
+		<div><h1>Update!</h1></div>
+		<div><h1>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h1><button data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
+			<input type="text" data-ng-model="newFirstName" placeholder="{{pers.updatee.firstName}}"/>
+			<input type="text" data-ng-model="newLastName" placeholder="{{pers.updatee.lastName}}"/>
+			<select 
+				data-ng-init="selectedRole = pers.roles[0]"
+				data-ng-model="selectedRole" 
+				data-ng-options="x.title for x in pers.roles">
+			</select>
+			<button data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName, selectedRole)">Submit Update</button>
+	</div>
+</div>
+<!-- END search for person div -->  
+  <br/><br/>
+
+<!-- get person by id -- not needed? -->
+<!-- <div> -->
+<!--   <input type="text" data-ng-model="input" placeholder="Id"/> -->
+<!--   <button data-ng-click="pers.getPersonId(input)">Get Person by Id</button> -->
+  
+<!--    <div data-ng-show="pers.personsId"> -->
+<!--     <div> -->
+<!--     	<h3>{{pers.personsId.firstName}} {{pers.personsId.lastName}}</h3> -->
+<!--     </div> -->
+<!--     <div> -->
+<!--     	<h4>{{pers.personsId.personRole.title}}</h4> -->
+<!--     </div> -->
+<!--    </div> end ng show -->
+   
+<!--    <br/><br/><br/>    -->
+     
+<!-- </div> -->
+<!--END get person by id -- not needed? -->
+
+
+
+

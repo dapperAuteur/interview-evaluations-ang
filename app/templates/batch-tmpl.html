@@ -11,8 +11,8 @@
 
 </div>
 </div>
-<div class="row" ng-controller="BatchCtrl as batch">
-	<div class="col-md-12" ng-controller="TabsDemoCtrl">
+<div class="row" ng-controller="getAllBatches as getAll">
+	<div class="col-md-12" ng-controller="TabsDemoCtrl as tabctrl">
 		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
 			classes="btn-sm">
 		<div class="col-md-3">
@@ -36,8 +36,8 @@
 			</form>
 		</div>
 		</uib-tab>
-		<uib-tab heading="Update/Delete Batch" classes="btn-sm">
-		<div class="col-md-3" ng-controller="getAllBatches as allBatches">
+		<uib-tab ng-click="tabctrl.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<div class="col-md-5">
 			<form ng-submit="batch.updateBatch()">
 				<input placeholder="enter new batch name" type="text"
 					ng-model="batch.newBatchNameInput" /> <input
@@ -46,26 +46,27 @@
 				<button class="btn btn-info btn-xs" type="submit">Update
 					Batch</button>
 			</form>
-			<div data-ng-show="allBatches.batches">
-			<table class="table table-stripped table-bordered table-hover table-condensed">
+			
+			<table class="table table-bordered table-hover table-condensed">
 			<thead>
 			<tr>
-			<th>Batch ID</th>
-			<th>Batch Name</th>
-			<th>Action</th>
+			<th style="text-align:center">Batch ID</th>
+			<th style="text-align:center">Batch Name</th>
+			<th style="text-align:center">Action</th>
 			</tr>
 			</thead>
-			<tbody>
-			<tr data-ng-repeat="b in allBatches.batches">
-			<td>{{b.batches.id}}</td>
+			<tbody >
+			<tr ng-repeat="b in tabctrl.newData" align="center">
+			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
-			<td>update/delete</td>
+			<td><button class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>
 			</tr>
 			</tbody>
 			</table>
-			</div>
+		
 		</div>
 		</uib-tab> </uib-tabset>
+		
 	</div>
 </div>
 

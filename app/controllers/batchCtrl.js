@@ -1,8 +1,27 @@
 'use strict';
-angular.module('myApp').controller('BatchCtrl', function($http){
+angular.module('myApp').service('mySharedService', function(){
 
+	var sharedService = {};
+	sharedService.batchData = [];
+	sharedService.cardData = [];
+
+	sharedService.setbatchData = function(data){
+		this.batchData = data;
+	};
+
+	sharedService.getbatchData = function(){
+		return this.batchData;
+	}
+	
+    return sharedService;
+
+});
+
+angular.module('myApp').controller('BatchCtrl', function($http, mySharedService){
+	
   var myData = this;
-  console.log("outside function");
+  
+ 
   myData.getBatches = function(input) {
 	  console.log("inside function");
 	  console.log(input);
@@ -51,21 +70,31 @@ angular.module('myApp').controller('BatchCtrl', function($http){
   }
 });
 
-angular.module('myApp').controller('TabsDemoCtrl', function($scope, $window){
+angular.module('myApp').controller('TabsDemoCtrl', function($http, $scope, $window, mySharedService){
+	
+	var myData = this;
+	myData.getBatches = function(){
+		myData.newData = mySharedService.getbatchData();
+	}
+	
+	
 	
 });
 
-angular.module('myApp').controller('getAllBatches', function($scope, $window, $http){
-	var batchData = this;
-	batchData.getBatches = function(){
+angular.module('myApp').controller('getAllBatches', function($http, mySharedService){
+	
+	var myData = this;
+	myData.getBatches = function(){
 		$http({
 		      method: "GET",
 		      url: "//localhost:8080/api/v1/batches/"
 		    }).then(function(response){
-		      console.log(response.data.content);
-		      console.log("gets here");
-		      batchData.batches = response.data.content;
-		      console.log(batchData.batches);
+		      
+		      myData.batches = response.data.content;
+		      mySharedService.setbatchData(myData.batches);
+		      myData.newData = mySharedService.getbatchData();
+		      console.log("here:");
+		      console.log(myData.newData);
 
 		    }, function(response){
 		      console.log(response);
@@ -82,9 +111,9 @@ angular.module('myApp').controller('CreateBatch', function($scope, $window){
 	
 });
 
-angular.module('myApp').controller('addPersonController', function() {
+angular.module('myApp').controller('addPersonController', function(mySharedService) {
 
-	  this.choices = [{id: 'choice1'}, {id: 'choice2'}];
+	  this.choices = [];
 	  
 	  this.addNewChoice = function() {
 	    var newItemNo = this.choices.length+1;
