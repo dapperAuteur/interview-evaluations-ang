@@ -82,13 +82,21 @@ angular.module('myApp').controller('TabsDemoCtrl', function($http, $scope, $wind
 });
 
 angular.module('myApp').controller('getAllBatches', function($http, mySharedService){
-	
+
 	var myData = this;
+	
+	myData.currentPage = 0;
+	myData.pageSize = 20;
+	
 	myData.getBatches = function(){
 		$http({
 		      method: "GET",
-		      url: "//localhost:8080/api/v1/batches/"
+		      url: "//localhost:8080/api/v1/batches?page=" + myData.currentPage
 		    }).then(function(response){
+		      
+		      console.log(response);
+		      var pages = response.data.totalPages;
+		      console.log("pages " + pages);
 		      
 		      myData.batches = response.data.content;
 		      mySharedService.setbatchData(myData.batches);

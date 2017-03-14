@@ -13,6 +13,7 @@
 </div>
 </div>
 <div class="row" ng-controller="getAllBatches as getAll">
+  <h4>{{getAll.currentPage}}</h4>
 	<div class="col-md-12" ng-controller="TabsDemoCtrl as tabctrl">
 		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
 			classes="btn-sm">
@@ -60,7 +61,7 @@
 			<tr ng-repeat="b in tabctrl.newData" align="center">
 			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
-			<td><button class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>
+			<td><button class="btn btn-warning tableButton">Update</button><button class="btn btn-danger tableButton">Delete</button></td>
 			</tr>
 			</tbody>
 			</table>
