@@ -1,0 +1,224 @@
+<h1>Revature Interview Evaluations API Wiki</h1>
+
+<div class="container">
+<div data-ng-controller="WikiCtrl as w">
+<div class>
+  <div class="col-xs-6">
+
+    <!-- change goCats to not true or true -->
+    <button data-ng-click="" class="btn btn-primary btn-lg">Project Description</button>
+  </div>
+
+  <div class="col-xs-6" data-ng-show="w.projectDesc">
+    <h4>Welcome to the interview-evaluations wiki! The <a href="https://github.com/1701-jan09-java/interview-evaluations/wiki" target="_blank">wiki</a> contains additional development information and links to projects and sites using the Revature Interview Evaluations API. For all code-related documentation, please refer to the bundled documentation in the <a href="https://github.com/1701-jan09-java/interview-evaluations" target="_blank">repository</a>, the Architecture page, or download.</h4>
+  </div>
+</div>
+<div class>
+  <div class="col-xs-6">
+
+    <!-- change goCats to not true or true -->
+    <button data-ng-click="w.togArch()" class="btn btn-primary btn-lg">Project Architecture</button>
+  </div>
+
+  <div class="col-xs-6" data-ng-show="w.arch">
+    <h1>Architecture (abridged)</h1>
+    <h5><a href="https://github.com/1701-jan09-java/interview-evaluations/wiki/architecture" target="_blank">The complete architecture is HERE.</a></h5>
+    <p>Data Retrieval Endpoints (with example returns)</p>
+
+    <p>Note: All endpoints are prefixed by **/api/v1/**</p>
+
+    <p><h2>Batch</h2></p>
+
+    <p>Retrieve specified Batch by batch id or batch name</p>
+
+    <p>Endpoint: batches/{id}</p>
+
+    <p>Note: {id} represents either batch id or batch name. Business logic handles this for us.</p>
+
+    <p>Retrieve all members (trainees) for a given batch by specifying batch id</p>
+
+    <p>Endpoint: batches/{id}/members</p>
+
+    <p>Retrieve all Evaluations for a Batch at a given Week
+
+    Endpoint: batches/{id}/week/{num}</p>
+
+    <p><h2>Eval</h2></p>
+
+    <p>Retrieve single Evaluation by ID</p>
+
+    <p>Endpoint: evaluations/{id}</p>
+
+    <p>Retrieve all Evaluations of a specified Trainee</p>
+
+    <p>Endpoint: evaluations/trainees/{id}</p>
+
+    <p>Retrieve all Evaluations of a specified Trainee at a specified Week</p>
+
+    <p>Endpoint: evaluations/trainees/{id}/week/{num}</p>
+
+    <p>Add new Eval</p>
+
+    <p>Endpoint: evaluations</p>
+
+    <p>Method: POST</p>
+
+    <p>Update Eval by ID</p>
+
+    <p>Endpoint: evaluations/update/{id}</p>
+
+    <p>Method: PUT</p>
+
+    <p>Delete Eval by ID</p>
+
+    <p>Endpoint: evaluations/delete/{id}</p>
+
+    <p>Method: DELETE</p>
+
+    <p><h2>Person</h2></p>
+
+    <p>Retrieve a single Person by Id</p>
+
+    <p>Endpoint: persons/{id}</p>
+
+    <p>Method: GET</p>
+
+    <p>Example:</p>
+    <p>persons/104</p>
+
+    <p>Retrieve page-able list of all Persons</p>
+
+    <p>Endpoint: persons/</p>
+
+    <p>Method: GET</p>
+
+    <p>Retrieve a page-able list of person/persons by first name and/or last name</p>
+
+    <p>Endpoints:</p>
+    <p>persons?firstname={firstname}</p>
+    <p>persons?lastname={lastname}</p>
+    <p>persons?firstname={firstname}&lastname={lastname}</p>
+
+    <p>Method: GET</p>
+
+    <p>Example:</p>
+    <p>persons?firstname=Efren</p>
+
+    <p>persons?lastname=Wakankar</p>
+
+    <p>Example:</p>
+    <p>persons?firstname=Tembong&lastname=Fonji</p>
+
+    <p>Retrieve persons by their role (trainer or trainee)</p>
+
+    <p>Endpoint: persons?role={role}</p>
+
+    <p>Method: GET</p>
+
+    <p>Example:</p>
+    <p>persons?role=2</p>
+
+    <p>Add a new person</p>
+
+    <p>Endpoint: persons</p>
+
+    <p>Method: POST</p>
+
+    <p>Return: The created Person</p>
+
+    <p>Update an existing person</p>
+
+    <p>Endpoint: persons</p>
+
+    <p>Method: PUT</p>
+
+    <p>Return: The updated Person</p>
+
+    <p>Delete an existing person</p>
+
+    <p>Endpoint: persons</p>
+
+    <p>Method: DELETE</p>
+
+    <p>Return: String message = {firstName} + " " + {lastName} + " was deleted."</p>
+
+    <p><h2>Questions</h2></p>
+
+    <p>Retrieve pageable list of all Questions</p>
+
+    <p>Endpoint: questions</p>
+
+    <p>Retrieve specific Question or list of Questions by Subject</p>
+
+    <p>Endpoints:</p>
+    <p>search?searchText={question text}</p>
+    <p>search?subject={subject name}</p>
+
+    <p>Method: GET</p>
+
+    <p>Add new Question</p>
+
+    <p>Endpoint: questions</p>
+
+    <p>Method: POST</p>
+
+    <p>Update Question by ID</p>
+
+    <p>Endpoint: questions/update/{id}</p>
+
+    <p>Method: PUT</p>
+
+    <p>Delete Question by ID</p>
+
+    <p>Endpoint: questions/delete/{id}</p>
+
+    <p>Method: DELETE</p>
+
+    <p>Other Data Manipulation Endpoints</p>
+
+    <p>Note: All endpoints are prefixed by /api/v1/</p>
+
+    <p><h2>EvalComment</h2></p>
+
+    <p>Add new EvalComment</p>
+
+    <p>Endpoint: evaluations/comments</p>
+
+    <p>Method: PUT</p>
+
+    <p>Update EvalComment by ID</p>
+
+    <p>Endpoint: evaluations/comments/update/{id}</p>
+
+    <p>Method: PUT</p>
+
+    <p>Delete EvalComment by ID</p>
+
+    <p>Endpoint: evaluations/comments/delete/{id}</p>
+
+    <p>Method: DELETE</p>
+
+    <p></p>
+
+    <p><h2>QuestionComment</h2></p>
+
+    <p>Add new QuestionComment</p>
+
+    <p>Endpoint: questions/comments</p>
+
+    <p>Method: PUT</p>
+
+    <p>Update QuestionComment by ID</p>
+
+    <p>Endpoint: questions/comments/update/{id}</p>
+
+    <p>Method: PUT</p>
+
+    <p>Delete QuestionComment by ID</p>
+
+    <p>Endpoint: questions/comments/delete/{id}</p>
+  </div>
+</div>
+</div>
+</div>
+</div>
