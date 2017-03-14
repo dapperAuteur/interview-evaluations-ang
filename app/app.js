@@ -20,7 +20,7 @@ var ie = angular.module('myApp', [
        .state('persons', {
         url: '/persons',
         templateUrl: 'app/templates/persons-tmpl.html'
-        	
+
       })
       .state('batch', {
         url: '/batch',
@@ -32,10 +32,10 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/evaluations-tmpl.html',
         controller: 'EvaluationsCtrl as evaluations'
       })
-      .state('faq', {
-        url: '/faq',
-        templateUrl: 'app/templates/faq-tmpl.html',
-        controller: 'FAQCtrl as faq'
+      .state('wiki', {
+        url: '/wiki',
+        templateUrl: 'app/templates/wiki-tmpl.html',
+        controller: 'WikiCtrl as wiki'
       })
       .state('questions', {
         url: '/questions',

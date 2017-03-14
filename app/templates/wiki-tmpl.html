@@ -1,7 +1,7 @@
 <h1>Revature Interview Evaluations API Wiki</h1>
 
 <div class="container">
-<div data-ng-controller="FAQCtrl as f">
+<div data-ng-controller="WikiCtrl as w">
 <div class>
   <div class="col-xs-6">
 
@@ -9,7 +9,7 @@
     <button data-ng-click="" class="btn btn-primary btn-lg">Project Description</button>
   </div>
 
-  <div class="col-xs-6" data-ng-show="f.projectDesc">
+  <div class="col-xs-6" data-ng-show="w.projectDesc">
     <h4>Welcome to the interview-evaluations wiki! The <a href="https://github.com/1701-jan09-java/interview-evaluations/wiki" target="_blank">wiki</a> contains additional development information and links to projects and sites using the Revature Interview Evaluations API. For all code-related documentation, please refer to the bundled documentation in the <a href="https://github.com/1701-jan09-java/interview-evaluations" target="_blank">repository</a>, the Architecture page, or download.</h4>
   </div>
 </div>
@@ -17,10 +17,10 @@
   <div class="col-xs-6">
 
     <!-- change goCats to not true or true -->
-    <button data-ng-click="f.togArch()" class="btn btn-primary btn-lg">Project Architecture</button>
+    <button data-ng-click="w.togArch()" class="btn btn-primary btn-lg">Project Architecture</button>
   </div>
 
-  <div class="col-xs-6" data-ng-show="f.arch">
+  <div class="col-xs-6" data-ng-show="w.arch">
     <h1>Architecture (abridged)</h1>
     <h5><a href="https://github.com/1701-jan09-java/interview-evaluations/wiki/architecture" target="_blank">The complete architecture is HERE.</a></h5>
     <p>Data Retrieval Endpoints (with example returns)</p>
