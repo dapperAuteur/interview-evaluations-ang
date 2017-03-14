@@ -260,7 +260,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	  
 	  myData.updated = JSON.stringify(myData.uJson);
 	  console.log(myData.updated);
-	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
+	  $http.put("//localhost:8080/api/v1/persons/"+myData.uJson.id, myData.updated)
 	  	.then(
 				function(response) {
 					console.log("success update");
