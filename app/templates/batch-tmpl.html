@@ -12,44 +12,40 @@
 
 </div>
 </div>
+<<<<<<< HEAD
 <div class="row" ng-controller="getAllBatches as getAll">
   <h4>{{getAll.currentPage}}</h4>
 	<div class="col-md-12" ng-controller="TabsDemoCtrl as tabctrl">
+
+<div class="row" data-ng-controller="BatchCtrl as batch">
+<div class="row" data-ng-controller="getAllBatches as getAll">
+	<div class="col-md-12" data-ng-controller="TabsDemoCtrl as tabctrl">
 		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
 			classes="btn-sm">
 		<div class="col-md-3">
 			<form>
 				batch name:<input placeholder="batch name" type="text"
-					ng-model="batch.newBatchInput" />
-				<div ng-controller="addPersonController as addPerson">
+					data-ng-model="batch.newBatchInput" />
+				<div data-ng-controller="addPersonController as addPerson">
 					<fieldset data-ng-repeat="choice in addPerson.choices">
-						first name: <input type="text" ng-model="choice.firstName" name=""
+						first name: <input type="text" data-ng-model="choice.firstName" name=""
 							placeholder="first name">last name: <input type="text"
-							ng-model="choice.lastName" name="" placeholder="last name">
+							data-ng-model="choice.lastName" name="" placeholder="last name">
 						
-						<button class="remove" ng-show="$last"
-							ng-click="addPerson.removeChoice()">-</button>
+						<button class="remove" data-ng-show="$last"
+							data-ng-click="addPerson.removeChoice()">-</button>
 					</fieldset>
-					<button class="addfields" ng-click="addPerson.addNewChoice()">Add
+					<button class="addfields" data-ng-click="addPerson.addNewChoice()">Add
 						person</button>
 				</div>
-				<button ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
+				<button data-ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
 					Batch</button>
 			</form>
 		</div>
 		</uib-tab>
-		<uib-tab ng-click="tabctrl.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<uib-tab data-ng-click="tabctrl.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
 		<div class="col-md-5">
-			<form ng-submit="batch.updateBatch()">
-				<input placeholder="enter new batch name" type="text"
-					ng-model="batch.newBatchNameInput" /> <input
-					placeholder="enter batch ID" type="text"
-					ng-model="batch.batchIdInput" />
-				<button class="btn btn-info btn-xs" type="submit">Update
-					Batch</button>
-			</form>
-			
-			<table class="table table-bordered table-hover table-condensed">
+			<table data-ng-hide="batch.showUpdateFields" class="table table-bordered table-hover table-condensed">
 			<thead>
 			<tr>
 			<th style="text-align:center">Batch ID</th>
@@ -58,17 +54,48 @@
 			</tr>
 			</thead>
 			<tbody >
-			<tr ng-repeat="b in tabctrl.newData" align="center">
+			<tr data-ng-repeat="b in tabctrl.newData" align="center">
 			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
-			<td><button class="btn btn-warning tableButton">Update</button><button class="btn btn-danger tableButton">Delete</button></td>
+
+			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>			
+
 			</tr>
 			</tbody>
 			</table>
+			<div data-ng-show = "batch.showUpdateFields">
+					<input type="text" placeholder="{{batch.updatedBranch.name}}"/><button class="btn btn-danger" data-ng-click="batch.updateBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
+					<table class="table table-bordered table-hover">
+					<thead>
+					<tr>
+					<th style="text-align:center">First Name</th>
+					<th style="text-align:center">Last Name</th>
+					</tr>
+					<tbody>
+					<tr data-ng-repeat="b in batch.updatedBranch.persons" align="center">
+					<td>{{b.firstName}}</td>
+					<td>{{b.lastName}}</td>
+					</tr>
+					</tbody>
+					</table>
+					
+					<div data-ng-controller="addPersonController as addPerson">
+					<fieldset data-ng-repeat="choice in addPerson.choices">
+						first name: <input type="text" data-ng-model="choice.firstName" name=""
+							placeholder="first name">last name: <input type="text"
+							data-ng-model="choice.lastName" name="" placeholder="last name">
+						
+						<button class="remove" data-ng-show="$last"
+							data-ng-click="addPerson.removeChoice()">-</button>
+					</fieldset>
+					<button class="addfields" data-ng-click="addPerson.addNewChoice()">Add
+						person</button>
+				</div>
+				</div>
 		
 		</div>
 		</uib-tab> </uib-tabset>
-		
+		</div>
 	</div>
 </div>
 

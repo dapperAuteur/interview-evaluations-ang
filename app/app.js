@@ -25,7 +25,7 @@ var ie = angular.module('myApp', [
       .state('batch', {
         url: '/batch',
         templateUrl: 'app/templates/batch-tmpl.html',
-        controller: 'BatchCtrl as batch'
+//        controller: 'BatchCtrl as batch'
       })
       .state('evaluations', {
         url: '/evaluations',
