@@ -1,5 +1,4 @@
 body,
-
 html {
 
 	min-height: 100%;
@@ -12,7 +11,10 @@ html {
 
 }
 
-
+.tableButton {
+	margin-left: 7px;
+	margin-right: 7px;
+}
 
 body {
 	/*background-image: url(/images/2016-10-13_1402.png);
@@ -284,7 +286,7 @@ color: red !important;
 }
 
 
-
+/*
 h2 {
 
 	position: absolute;
@@ -296,9 +298,9 @@ h2 {
 	width: 100%;
 
 }
+*/
 
-
-
+/*
 h3 {
 	position: absolute;
 	top: 1px;
@@ -309,6 +311,7 @@ h3 {
 	color: rgba(202,53,148,1.00);
 
 }
+*/
 
 .awepixtext {
 

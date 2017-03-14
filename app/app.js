@@ -17,10 +17,15 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/home-tmpl.html',
         controller: 'HomeCtrl as home'
       })
+       .state('persons', {
+        url: '/persons',
+        templateUrl: 'app/templates/persons-tmpl.html'
+        	
+      })
       .state('batch', {
         url: '/batch',
         templateUrl: 'app/templates/batch-tmpl.html',
-        controller: 'BatchCtrl as batch'
+//        controller: 'BatchCtrl as batch'
       })
       .state('evaluations', {
         url: '/evaluations',
@@ -42,16 +47,6 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/subjects-tmpl.html',
         controller: 'SubjectsCtrl as subjects'
       })
-      .state('trainees', {
-        url: '/trainees',
-        templateUrl: 'app/templates/trainees-tmpl.html',
-        controller: 'TraineesCtrl as trainees'
-      })
-      .state('trainers', {
-        url: '/trainers',
-        templateUrl: 'app/templates/trainers-tmpl.html',
-        controller: 'TrainersCtrl as trainers'
-      });
 
     //default routing
     $urlRouterProvider.otherwise('/');

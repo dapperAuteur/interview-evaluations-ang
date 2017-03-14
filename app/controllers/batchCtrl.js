@@ -1,2 +1,142 @@
 'use strict';
-angular.module('myApp').controller('BatchCtrl', function($state){});
+angular.module('myApp').service('mySharedService', function(){
+
+	var sharedService = this;
+	sharedService.batchData = [];
+	sharedService.cardData = [];
+
+	sharedService.setbatchData = function(data){
+		this.batchData = data;
+	};
+
+	sharedService.getbatchData = function(){
+		return this.batchData;
+	}
+	
+    return sharedService;
+
+});
+
+angular.module('myApp').controller('BatchCtrl', function($http, mySharedService){
+	
+  var myData = this;
+  myData.showUpdateFields=false;
+ 
+  myData.getBatches = function(input) {
+	  console.log("inside function");
+	  console.log(input);
+    $http({
+      method: "GET",
+      url: "//localhost:8080/api/v1/batches/" + input
+    }).then(function(response){
+      console.log(response);
+      myData.batches = response.data;
+      console.log(response.data);
+
+    }, function(response){
+      console.log(response);
+    });
+  }
+  
+  myData.postBatch = function(){
+	  console.log(myData.newBatchInput);
+	  console.log(myData.firstName);
+	  var data = JSON.stringify({
+		  name: myData.newBatchInput
+	  });
+	  
+	  $http.post("//localhost:8080/api/v1/batches", data).then(function(response){
+		  
+	  },
+	  function(response){
+		  
+	  });
+  }
+  
+  myData.showUpdateBatchInit = function(b){
+	  myData.showUpdateFields=true;
+	  myData.updatedBranch = b; 
+	  console.log(b);
+  }
+  
+  myData.cancelUpdate = function(){
+	  myData.showUpdateFields=false;
+  }
+  
+  myData.updateBatch = function(b){
+	  console.log("lets update now");
+	  console.log(b);
+//	  myData.showUpdateFields=true;
+//	  myData.updatedBranch = b; 
+//	  console.log (b);
+//	  
+//	  var data = JSON.stringify({
+//		  name: myData.newBatchNameInput,
+//		  id: myData.batchIdInput
+//	  });
+//	  
+//	  $http.put("//localhost:8080/api/v1/batches", data).then(function(response){
+//		  
+//	  },
+//	  function(response){
+//		  
+//	  });
+  }
+});
+
+angular.module('myApp').controller('TabsDemoCtrl', function($http, $scope, $window, mySharedService){
+	
+	var myData = this;
+	myData.getBatches = function(){
+		myData.newData = mySharedService.getbatchData();
+	}
+	
+	
+	
+});
+
+angular.module('myApp').controller('getAllBatches', function($http, mySharedService){
+	
+	var myData = this;
+	myData.getBatches = function(){
+		$http({
+		      method: "GET",
+		      url: "//localhost:8080/api/v1/batches/"
+		    }).then(function(response){
+		      
+		      myData.batches = response.data.content;
+		      mySharedService.setbatchData(myData.batches);
+		      myData.newData = mySharedService.getbatchData();
+		      console.log("here:");
+		      console.log(myData.newData);
+
+		    }, function(response){
+		      console.log(response);
+		    });
+	}
+	
+});
+
+angular.module('myApp').controller('UpdateDeleteBatch', function($scope, $window){
+	
+});
+
+angular.module('myApp').controller('CreateBatch', function($scope, $window){
+	
+});
+
+angular.module('myApp').controller('addPersonController', function(mySharedService) {
+
+	  this.choices = [];
+	  
+	  this.addNewChoice = function() {
+	    var newItemNo = this.choices.length+1;
+	    this.choices.push({'id':'choice'+newItemNo});
+	  };
+	  
+	  this.removeChoice = function() {
+		    var lastItem = this.choices.length-1;
+		    this.choices.splice(lastItem);
+		  };
+});
+
