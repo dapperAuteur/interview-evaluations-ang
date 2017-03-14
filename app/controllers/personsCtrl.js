@@ -317,9 +317,26 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 
 	      }, function(response){
 	        console.log("fail search " + response);
-	      });
-	   
+	      });	   
    }
+   
+   myData.changePage = function(page) {
+	   
+	   $http({
+	        method: "GET",
+	        url: "//localhost:8080/api/v1/persons?page="+page
+	        
+	      }).then(function(response){
+	        console.log(response);
+	        myData.persons = response.data.content;
+	        console.log("success page " + page + response.data);
+
+	      }, function(response){
+	        console.log("fail search " + response);
+	      });
+   }
+   
+   
 });
 
 angular.module('myApp').controller('TestCtrl', function() {
