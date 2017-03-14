@@ -22,7 +22,8 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in create.roles">
 	</select>
-	<button class = "createBtn btn btn-success" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	&nbsp;
+	<button class = "btn btn-success" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
 	
 	<br/>
     <div data-ng-cloak data-ng-show="create.showCreator">
@@ -50,7 +51,8 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in pers.roles">
 	</select>
-    <button class = "searchBtn btn btn-success" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
+	&nbsp;
+    <button class = "btn btn-success" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
   
   <br/><br/>
   
@@ -65,7 +67,10 @@
   		<tr data-ng-repeat="p in pers.persons">  			
   			<td>{{p.firstName}} {{p.lastName}} </td>
   			<td>{{p.personRole.title | uppercase}} </td>
-  			<td><button class = "deleteBtn btn btn-danger" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> <button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button></td>
+  			<td><button class = "deleteBtn btn btn-danger" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> 
+  				<button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button>
+  				<button class = "evalBtn btn btn-primary" data-ng-click="pers.getEvals(p)">Evaluations</button>
+  			</td>
   		</tr>
   	</table>
   	 
@@ -78,8 +83,8 @@
     </div>
     
  	<div data-ng-cloak data-ng-show="pers.showUpdater">
-		<div><h1>Update!</h1></div>
-		<div><h1>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h1><button data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
+		<div><h3>Update Person</h3></div>
+		<div><h4>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h4><button class = "btn btn-danger" data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
 			<input type="text" data-ng-model="newFirstName" placeholder="{{pers.updatee.firstName}}"/>
 			<input type="text" data-ng-model="newLastName" placeholder="{{pers.updatee.lastName}}"/>
 			<select 
@@ -87,7 +92,7 @@
 				data-ng-model="updatedRole" 
 				data-ng-options="x.title for x in pers.roles">
 			</select>
-			<button data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName, updatedRole)" data-confirmation-needed>Submit Update</button>
+			<button class = "btn btn-success" data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName, updatedRole)" data-confirmation-needed>Update</button>
 	</div>
 </div>
 

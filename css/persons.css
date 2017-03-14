@@ -6,7 +6,7 @@ table, th , td  {
   padding: 13px;
 }
 table tr:nth-child(odd) {
-  background-color: #9dcde8;
+  background-color: #c1c5f1;
 }
 table tr:nth-child(even) {
   background-color: #e8e8e8;
@@ -20,16 +20,6 @@ table tr:nth-child(even) {
 .flashNotifyError {
 	
 	color:red;
-}
-
-.createBtn {
-
-	float : right;
-}
-
-.searchBtn {
-	
-	float : right;
 }
 
 .updateBtn {

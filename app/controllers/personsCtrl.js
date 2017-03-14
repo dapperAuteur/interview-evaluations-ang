@@ -299,6 +299,27 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	myData.setFalseShowDeleter = function(){
 		myData.showDeleter = false;
 	}
+	
+	// EVALS
+	
+   myData.getEvals = function(perval) {
+	   
+	   $http({
+	        method: "GET",
+	        url: "//localhost:8080/api/v1/evaluations/trainees/" + perval.id
+	        
+	      }).then(function(response){
+	    	  
+	    	console.log("success eval ");
+	        console.log(response.data.content);
+	        //myData.eval = response.data.content;
+	        
+
+	      }, function(response){
+	        console.log("fail search " + response);
+	      });
+	   
+   }
 });
 
 angular.module('myApp').controller('TestCtrl', function() {
