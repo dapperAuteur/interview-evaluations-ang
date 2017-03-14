@@ -1,8 +1,9 @@
 @CHARSET "UTF-8";
 
 table, th , td  {
-  border: 1px #3F51B5;
-  border-collapse: collapse;
+  border: 10px #3F51B5;
+  border-style: groove;
+  border-width: 1px;
   padding: 13px;
 }
 table tr:nth-child(odd) {
