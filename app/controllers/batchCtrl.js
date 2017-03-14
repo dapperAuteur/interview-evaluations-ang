@@ -1,7 +1,7 @@
 'use strict';
 angular.module('myApp').service('mySharedService', function(){
 
-	var sharedService = {};
+	var sharedService = this;
 	sharedService.batchData = [];
 	sharedService.cardData = [];
 
@@ -20,7 +20,7 @@ angular.module('myApp').service('mySharedService', function(){
 angular.module('myApp').controller('BatchCtrl', function($http, mySharedService){
 	
   var myData = this;
-  
+  myData.showUpdateFields=false;
  
   myData.getBatches = function(input) {
 	  console.log("inside function");
@@ -53,20 +53,22 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	  });
   }
   
-  myData.updateBatch = function(){
-	  console.log(myData.newBatchNameInput);
-	  console.log(myData.batchIdInput);
-	  var data = JSON.stringify({
-		  name: myData.newBatchNameInput,
-		  id: myData.batchIdInput
-	  });
-	  
-	  $http.put("//localhost:8080/api/v1/batches", data).then(function(response){
-		  
-	  },
-	  function(response){
-		  
-	  });
+  myData.updateBatch = function(b){
+	  myData.showUpdateFields=true;
+	  myData.updatedBranch = b; 
+	  console.log (b);
+//	  
+//	  var data = JSON.stringify({
+//		  name: myData.newBatchNameInput,
+//		  id: myData.batchIdInput
+//	  });
+//	  
+//	  $http.put("//localhost:8080/api/v1/batches", data).then(function(response){
+//		  
+//	  },
+//	  function(response){
+//		  
+//	  });
   }
 });
 
