@@ -34,25 +34,24 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 					console.log(response);
 					console.log("success");
 					
-					myData.createdName = first + " " + last;
-					
+					myData.createdName = first + " " + last;					
 					myData.showCreator = true;
-					$timeout(myData.seFalseShowCreator, 1000);
+					$timeout(myData.setFalseShowCreator, 3000);
 				},
 				function(response) {
-					console.log("failure");
+					console.log("failure create");
 				}
 			);		
 	}
 	
-	myData.seFalseShowCreator = function(){
+	myData.setFalseShowCreator = function(){
 		myData.showCreator = false;
 	}
 	
 });
 
 // View person by name: (May have to change the urls)
-angular.module('myApp').controller('ViewPersonsCtrl', function($http){
+angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window){
 	
   var myData = this;
   
@@ -241,7 +240,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 	  myData.updated = JSON.stringify(myData.uJson);
 	  console.log(myData.updated);
 	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
-	  .then(
+	  	.then(
 				function(response) {
 					console.log("success update");
 					myData.showUpdater=false;
@@ -255,6 +254,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
   // big long function to delete
   
   myData.deletePerson = function(del){
+	  
 	  myData.delId = del.id;
 	  
 	  $http.delete("//localhost:8080/api/v1/persons/" + myData.delId)
@@ -262,9 +262,9 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 			function(response) {
 				console.log("success " + myData.delId);
 				
-				myData.deletedName = del.firstName + " " + del.lastName;
-				
-				myData.showDeleter = true;
+				myData.deletedName = del.firstName + " " + del.lastName;				
+				myData.showDeleter = true;				
+				$timeout(myData.setFalseShowDeleter, 3000);
 				
 			},
 			function(response) {
@@ -274,4 +274,18 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		);	
 
   }
+  
+	myData.setFalseShowDeleter = function(){
+		myData.showDeleter = false;
+	}
+});
+
+angular.module('myApp').controller('TestCtrl', function() {
+	
+	var self = this;
+	
+	self.alert= function() {
+		console.log("confirmed");
+	}
+	
 });
