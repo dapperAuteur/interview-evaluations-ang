@@ -22,12 +22,18 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in create.roles">
 	</select>
-	<button class = "createBtn" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	<button class = "createBtn btn btn-success" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
 	
 	<br/>
     <div data-ng-cloak data-ng-show="create.showCreator">
     	<h4 class = "flashNotify">{{create.createdName}} was created</h4>
     </div>
+    <div data-ng-cloak data-ng-show="create.showCreatorError">
+    	<h4 class = "flashNotifyError">{{create.error}}</h4>
+    </div>
+    
+    
+    
 	
 </div> <!-- end CreateCtrl -->
 
@@ -44,7 +50,7 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in pers.roles">
 	</select>
-    <button class = "searchBtn" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
+    <button class = "searchBtn btn btn-success" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
   
   <br/><br/>
   
@@ -58,8 +64,8 @@
   		</tr>
   		<tr data-ng-repeat="p in pers.persons">  			
   			<td>{{p.firstName}} {{p.lastName}} </td>
-  			<td>{{p.personRole.title}} </td>
-  			<td><button class = "deleteBtn" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> <button class = "updateBtn" data-ng-click="pers.updatePerson(p)">Update</button></td>
+  			<td>{{p.personRole.title | uppercase}} </td>
+  			<td><button class = "deleteBtn btn btn-danger" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> <button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button></td>
   		</tr>
   	</table>
   	 

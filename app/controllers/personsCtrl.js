@@ -5,6 +5,7 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 	
 	var myData = this;
 	myData.showCreator = false;
+	myData.showCreatorError = false;
 	
 	myData.roles =  [
 		{title : "Choose role", id : "0"},
@@ -40,6 +41,23 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 				},
 				function(response) {
 					console.log("failure create");
+					
+					if (first === "" ||  typeof first === 'undefined') {
+						
+						myData.error = "Please enter a first name";
+						
+					} else if (last === "" || typeof last === 'undefined') {
+						
+						myData.error = "Please enter a last name";
+					
+					} else if (role.title === "Choose role") {
+						
+						myData.error = "Please choose a role";
+						
+					}					
+					
+					myData.showCreatorError = true;
+					$timeout(myData.setFalseShowCreatorError, 3000);
 				}
 			);		
 	}
@@ -48,6 +66,9 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 		myData.showCreator = false;
 	}
 	
+	myData.setFalseShowCreatorError = function(){
+		myData.showCreatorError = false;
+	}
 });
 
 // View person by name: (May have to change the urls)
