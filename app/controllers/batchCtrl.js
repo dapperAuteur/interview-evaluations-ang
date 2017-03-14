@@ -53,10 +53,22 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	  });
   }
   
-  myData.updateBatch = function(b){
+  myData.showUpdateBatchInit = function(b){
 	  myData.showUpdateFields=true;
 	  myData.updatedBranch = b; 
-	  console.log (b);
+	  console.log(b);
+  }
+  
+  myData.cancelUpdate = function(){
+	  myData.showUpdateFields=false;
+  }
+  
+  myData.updateBatch = function(b){
+	  console.log("lets update now");
+	  console.log(b);
+//	  myData.showUpdateFields=true;
+//	  myData.updatedBranch = b; 
+//	  console.log (b);
 //	  
 //	  var data = JSON.stringify({
 //		  name: myData.newBatchNameInput,
