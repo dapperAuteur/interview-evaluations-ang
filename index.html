@@ -40,8 +40,8 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a data-ui-sref="batch">Batch</a></li>
+				<ul class="nav navbar-nav" ng-controller="getAllBatches as getAll">
+					<li><a data-ui-sref="batch" ng-click="getAll.getBatches()">Batch</a></li>
 					<li><a data-ui-sref="evaluations">Evaluations</a></li>
 					<li><a data-ui-sref="faq">FAQ</a></li>
 					<li><a data-ui-sref="questions">Questions</a></li>

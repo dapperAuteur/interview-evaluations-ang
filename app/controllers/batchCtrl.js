@@ -21,6 +21,7 @@ angular.module('myApp').controller('BatchCtrl', function($http){
   
   myData.postBatch = function(){
 	  console.log(myData.newBatchInput);
+	  console.log(myData.firstName);
 	  var data = JSON.stringify({
 		  name: myData.newBatchInput
 	  });
@@ -52,4 +53,47 @@ angular.module('myApp').controller('BatchCtrl', function($http){
 
 angular.module('myApp').controller('TabsDemoCtrl', function($scope, $window){
 	
-})
+});
+
+angular.module('myApp').controller('getAllBatches', function($scope, $window, $http){
+	var batchData = this;
+	batchData.getBatches = function(){
+		$http({
+		      method: "GET",
+		      url: "//localhost:8080/api/v1/batches/"
+		    }).then(function(response){
+		      console.log(response.data.content);
+		      console.log("gets here");
+		      batchData.batches = response.data.content;
+		      console.log(batchData.batches);
+
+		    }, function(response){
+		      console.log(response);
+		    });
+	}
+	
+});
+
+angular.module('myApp').controller('UpdateDeleteBatch', function($scope, $window){
+	
+});
+
+angular.module('myApp').controller('CreateBatch', function($scope, $window){
+	
+});
+
+angular.module('myApp').controller('addPersonController', function() {
+
+	  this.choices = [{id: 'choice1'}, {id: 'choice2'}];
+	  
+	  this.addNewChoice = function() {
+	    var newItemNo = this.choices.length+1;
+	    this.choices.push({'id':'choice'+newItemNo});
+	  };
+	  
+	  this.removeChoice = function() {
+		    var lastItem = this.choices.length-1;
+		    this.choices.splice(lastItem);
+		  };
+});
+

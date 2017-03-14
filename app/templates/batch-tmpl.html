@@ -2,41 +2,42 @@
 
 <div class="row">
 
-	<div class="col-md-12" data-ng-controller="BatchCtrl as batch">
 
 
-		
-
-		</div>
-
-		<div data-ng-show="batch.batches">
-			<div>{{batch.batches.name}}</div>
-			<!-- <img alt="Pokemon Image" data-ng-src="{{train.pokemon.sprites.front_default}}"/> -->
-		</div>
-
-
+	<div data-ng-show="batch.batches">
+		<div>{{batch.batches.name}}</div>
 	</div>
+
+
+</div>
 </div>
 <div class="row" ng-controller="BatchCtrl as batch">
 	<div class="col-md-12" ng-controller="TabsDemoCtrl">
-		<uib-tabset type="pills"> <uib-tab heading="Get Batch"
+		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
 			classes="btn-sm">
 		<div class="col-md-3">
-			<input type="text" data-ng-model="input" />
-			<button class="btn btn-info btn-xs"
-				data-ng-click="batch.getBatches(input)">Get Batch</button>
-		</div>
-		</uib-tab> <uib-tab heading="Create Batch" classes="btn-sm">
-		<div class="col-md-3">
-			<form ng-submit="batch.postBatch()">
-				<input placeholder="enter batch name" type="text"
+			<form>
+				batch name:<input placeholder="batch name" type="text"
 					ng-model="batch.newBatchInput" />
-				<button class="btn btn-info btn-xs" type="submit">Create
+				<div ng-controller="addPersonController as addPerson">
+					<fieldset data-ng-repeat="choice in addPerson.choices">
+						first name: <input type="text" ng-model="choice.firstName" name=""
+							placeholder="first name">last name: <input type="text"
+							ng-model="choice.lastName" name="" placeholder="last name">
+						
+						<button class="remove" ng-show="$last"
+							ng-click="addPerson.removeChoice()">-</button>
+					</fieldset>
+					<button class="addfields" ng-click="addPerson.addNewChoice()">Add
+						person</button>
+				</div>
+				<button ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
 					Batch</button>
 			</form>
 		</div>
-		</uib-tab> <uib-tab heading="Update Batch" classes="btn-sm">
-		<div class="col-md-3">
+		</uib-tab>
+		<uib-tab heading="Update/Delete Batch" classes="btn-sm">
+		<div class="col-md-3" ng-controller="getAllBatches as allBatches">
 			<form ng-submit="batch.updateBatch()">
 				<input placeholder="enter new batch name" type="text"
 					ng-model="batch.newBatchNameInput" /> <input
@@ -45,11 +46,26 @@
 				<button class="btn btn-info btn-xs" type="submit">Update
 					Batch</button>
 			</form>
+			<div data-ng-show="allBatches.batches">
+			<table class="table table-stripped table-bordered table-hover table-condensed">
+			<thead>
+			<tr>
+			<th>Batch ID</th>
+			<th>Batch Name</th>
+			<th>Action</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr data-ng-repeat="b in allBatches.batches">
+			<td>{{b.batches.id}}</td>
+			<td>{{b.name}}</td>
+			<td>update/delete</td>
+			</tr>
+			</tbody>
+			</table>
 			</div>
-		</uib-tab>
-		
-		<uib-tab heading="Delete Batch" class="btn-sm">Tab 4
-		content</uib-tab> </uib-tabset>
+		</div>
+		</uib-tab> </uib-tabset>
 	</div>
 </div>
 
