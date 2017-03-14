@@ -1,14 +1,25 @@
 @CHARSET "UTF-8";
 
-
-.createBtn {
-
-	float : right;
+table, th , td  {
+  border: 1px #3F51B5;
+  border-collapse: collapse;
+  padding: 13px;
+}
+table tr:nth-child(odd) {
+  background-color: #c1c5f1;
+}
+table tr:nth-child(even) {
+  background-color: #e8e8e8;
 }
 
-.searchBtn {
+.flashNotify {
 	
-	float : right;
+	color:green;
+}
+
+.flashNotifyError {
+	
+	color:red;
 }
 
 .updateBtn {

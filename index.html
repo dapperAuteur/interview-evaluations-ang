@@ -7,7 +7,7 @@
 <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link type="text/javascript" href="/scripts/bootstrap.js">
-</script>
+
 <link rel="stylesheet" href="css/styles.css">
 <!--   dependencies -->
 <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.2/angular.js"></script> -->
@@ -24,6 +24,21 @@
 <body>
 	<div class="container-fluid">
 	<div class="row">
+
+	<!-- my scripts -->
+		<script type="text/javascript" src="./app/app.js"></script>
+		<script type="text/javascript" src="./app/directives/dateDirective.js"></script>
+		<script type="text/javascript" src="./app/directives/confirmDirective.js"></script>
+	<script type="text/javascript" src="./app/controllers/personsCtrl.js"></script>	
+    <script type="text/javascript" src="./app/controllers/traineesCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/trainersCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/batchCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/evaluationsCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/faqCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/homeCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/questionsCtrl.js"></script>
+    <script type="text/javascript" src="./app/controllers/subjectsCtrl.js"></script>
+
 
 	<nav class="navbar navbar-default navbar-inverse" role="navigation">
 		<div class="container-fluid">
@@ -42,13 +57,12 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav" ng-controller="getAllBatches as getAll">
+					<li><a data-ui-sref="persons">Persons</a></li>
 					<li><a data-ui-sref="batch" ng-click="getAll.getBatches()">Batch</a></li>
 					<li><a data-ui-sref="evaluations">Evaluations</a></li>
 					<li><a data-ui-sref="faq">FAQ</a></li>
 					<li><a data-ui-sref="questions">Questions</a></li>
 					<li><a data-ui-sref="subjects">Subjects</a></li>
-					<li><a data-ui-sref="trainees">Trainees</a></li>
-					<li><a data-ui-sref="trainers">Trainers</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -67,16 +81,5 @@
 		<data-ui-view></data-ui-view>
 	</div>
 </body>
-<!-- my scripts -->
-<script type="text/javascript" src="./app/app.js"></script>
-<script type="text/javascript" src="./app/directives/dateDirective.js"></script>
-<script type="text/javascript" src="./app/controllers/batchCtrl.js"></script>
-<script type="text/javascript"
-	src="./app/controllers/evaluationsCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/faqCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/homeCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/questionsCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/subjectsCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/traineesCtrl.js"></script>
-<script type="text/javascript" src="./app/controllers/trainersCtrl.js"></script>
+
 </html>

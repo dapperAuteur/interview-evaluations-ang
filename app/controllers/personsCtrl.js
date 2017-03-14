@@ -5,6 +5,7 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 	
 	var myData = this;
 	myData.showCreator = false;
+	myData.showCreatorError = false;
 	
 	myData.roles =  [
 		{title : "Choose role", id : "0"},
@@ -34,25 +35,44 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 					console.log(response);
 					console.log("success");
 					
-					myData.createdName = first + " " + last;
-					
+					myData.createdName = first + " " + last;					
 					myData.showCreator = true;
-					$timeout(myData.seFalseShowCreator, 1000);
+					$timeout(myData.setFalseShowCreator, 3000);
 				},
 				function(response) {
-					console.log("failure");
+					console.log("failure create");
+					
+					if (first === "" ||  typeof first === 'undefined') {
+						
+						myData.error = "Please enter a first name";
+						
+					} else if (last === "" || typeof last === 'undefined') {
+						
+						myData.error = "Please enter a last name";
+					
+					} else if (role.title === "Choose role") {
+						
+						myData.error = "Please choose a role";
+						
+					}					
+					
+					myData.showCreatorError = true;
+					$timeout(myData.setFalseShowCreatorError, 3000);
 				}
 			);		
 	}
 	
-	myData.seFalseShowCreator = function(){
+	myData.setFalseShowCreator = function(){
 		myData.showCreator = false;
 	}
 	
+	myData.setFalseShowCreatorError = function(){
+		myData.showCreatorError = false;
+	}
 });
 
 // View person by name: (May have to change the urls)
-angular.module('myApp').controller('ViewPersonsCtrl', function($http){
+angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window){
 	
   var myData = this;
   
@@ -241,7 +261,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 	  myData.updated = JSON.stringify(myData.uJson);
 	  console.log(myData.updated);
 	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
-	  .then(
+	  	.then(
 				function(response) {
 					console.log("success update");
 					myData.showUpdater=false;
@@ -255,6 +275,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
   // big long function to delete
   
   myData.deletePerson = function(del){
+	  
 	  myData.delId = del.id;
 	  
 	  $http.delete("//localhost:8080/api/v1/persons/" + myData.delId)
@@ -262,9 +283,9 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 			function(response) {
 				console.log("success " + myData.delId);
 				
-				myData.deletedName = del.firstName + " " + del.lastName;
-				
-				myData.showDeleter = true;
+				myData.deletedName = del.firstName + " " + del.lastName;				
+				myData.showDeleter = true;				
+				$timeout(myData.setFalseShowDeleter, 3000);
 				
 			},
 			function(response) {
@@ -274,4 +295,39 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http){
 		);	
 
   }
+  
+	myData.setFalseShowDeleter = function(){
+		myData.showDeleter = false;
+	}
+	
+	// EVALS
+	
+   myData.getEvals = function(perval) {
+	   
+	   $http({
+	        method: "GET",
+	        url: "//localhost:8080/api/v1/evaluations/trainees/" + perval.id
+	        
+	      }).then(function(response){
+	    	  
+	    	console.log("success eval ");
+	        console.log(response.data.content);
+	        //myData.eval = response.data.content;
+	        
+
+	      }, function(response){
+	        console.log("fail search " + response);
+	      });
+	   
+   }
+});
+
+angular.module('myApp').controller('TestCtrl', function() {
+	
+	var self = this;
+	
+	self.alert= function() {
+		console.log("confirmed");
+	}
+	
 });

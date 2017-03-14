@@ -22,12 +22,19 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in create.roles">
 	</select>
-	<button class = "createBtn" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
+	&nbsp;
+	<button class = "btn btn-success" data-ng-click="create.save(first, last, selectedRole)">Submit</button>
 	
 	<br/>
     <div data-ng-cloak data-ng-show="create.showCreator">
-    	<h4>{{create.createdName}} was created</h4>
+    	<h4 class = "flashNotify">{{create.createdName}} was created</h4>
     </div>
+    <div data-ng-cloak data-ng-show="create.showCreatorError">
+    	<h4 class = "flashNotifyError">{{create.error}}</h4>
+    </div>
+    
+    
+    
 	
 </div> <!-- end CreateCtrl -->
 
@@ -44,34 +51,51 @@
 			data-ng-model="selectedRole" 
 			data-ng-options="x.title for x in pers.roles">
 	</select>
-    <button class = "searchBtn" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
+	&nbsp;
+    <button class = "btn btn-success" data-ng-click="pers.getPerson(input1, input2, selectedRole)">Search</button> 
   
   <br/><br/>
   
 <div data-ng-hide="pers.showUpdater">
   <div data-ng-show="pers.persons">  
-  	 <h4 data-ng-repeat="p in pers.persons">{{p.firstName}} {{p.lastName}}, {{p.personRole.title}} <button class = "deleteBtn" data-ng-click="pers.deletePerson(p)">Delete</button> <button class = "updateBtn" data-ng-click="pers.updatePerson(p)">Update</button></h4>
+  	<table>
+  		<tr>
+  			<th>Name</th>
+  			<th>Role</th>
+  			<th>Action</th>
+  		</tr>
+  		<tr data-ng-repeat="p in pers.persons">  			
+  			<td>{{p.firstName}} {{p.lastName}} </td>
+  			<td>{{p.personRole.title | uppercase}} </td>
+  			<td><button class = "deleteBtn btn btn-danger" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> 
+  				<button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button>
+  				<button class = "evalBtn btn btn-primary" data-ng-click="pers.getEvals(p)">Evaluations</button>
+  			</td>
+  		</tr>
+  	</table>
+  	 
   </div>
 </div> 
     
     <br/>
     <div data-ng-cloak data-ng-show="pers.showDeleter">
-    	<h4>{{pers.deletedName}} was deleted</h4>
+    	<h4 class = flashNotify>{{pers.deletedName}} was deleted</h4>
     </div>
     
  	<div data-ng-cloak data-ng-show="pers.showUpdater">
-		<div><h1>Update!</h1></div>
-		<div><h1>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h1><button data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
+		<div><h3>Update Person</h3></div>
+		<div><h4>{{pers.updatee.firstName}} {{pers.updatee.lastName}}</h4><button class = "btn btn-danger" data-ng-click="pers.cancelUpdatePerson()">Cancel Update</button></div>
 			<input type="text" data-ng-model="newFirstName" placeholder="{{pers.updatee.firstName}}"/>
 			<input type="text" data-ng-model="newLastName" placeholder="{{pers.updatee.lastName}}"/>
 			<select 
-				data-ng-init="selectedRole = pers.roles[0]"
-				data-ng-model="selectedRole" 
+				data-ng-init="updatedRole = pers.roles[0]"
+				data-ng-model="updatedRole" 
 				data-ng-options="x.title for x in pers.roles">
 			</select>
-			<button data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName, selectedRole)">Submit Update</button>
+			<button class = "btn btn-success" data-ng-click="pers.submitUpdatePerson(pers.updatee, newFirstName, newLastName, updatedRole)" data-confirmation-needed>Update</button>
 	</div>
 </div>
+
 <!-- END search for person div -->  
   <br/><br/>
 
