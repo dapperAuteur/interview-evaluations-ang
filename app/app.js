@@ -46,11 +46,7 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/subjects-tmpl.html',
         controller: 'SubjectsCtrl as subjects'
       })
-
-     .state('evaluationsbyTrainee', {
-        url: '/evaluation/trainee',
-        templateUrl: 'app/templates/evalByTrainee-tmpl.html'
-      })     
+      
     //default routing
     $urlRouterProvider.otherwise('/');
   });
