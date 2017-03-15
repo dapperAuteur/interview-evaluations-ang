@@ -310,14 +310,17 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	   var promise = evaluationsService.getTraineeEvaluations(perval.id);
        promise.then(function(result){
            myData.search = result;
-           console.log(myData.search);
-           evaluationsService.evalsFromPersonSearch=result;
+//           console.log(myData.search);
+           evaluationsService.evalsFromPersonSearch=myData.search;
+           evaluationsService.evalsFromPerson = true;
+           $state.go('evaluation');
+//           evaluationsService.search = myData.search;
        }, function(result){
 	        console.log("fail search " + result);
 	   });
 	   
-       evaluationsService.evalsFromPerson = true;
-       $state.go('evaluation');
+       
+      
 
 	   
    }
