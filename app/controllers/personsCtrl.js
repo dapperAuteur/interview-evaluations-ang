@@ -72,7 +72,9 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 });
 
 // View person by name: (May have to change the urls)
+
 angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window, $state, evaluationsService){
+
 	
   var myData = this;
   
@@ -305,7 +307,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	// EVALS
 	
    myData.getEvals = function(perval) {
-	   
+
 	   
 	   var promise = evaluationsService.getTraineeEvaluations(perval.id);
        promise.then(function(result){
@@ -319,10 +321,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	        console.log("fail search " + result);
 	   });
 	   
-       
-      
 
-	   
    }
    
    myData.changePage = function(page) {
