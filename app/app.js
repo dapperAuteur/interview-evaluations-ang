@@ -1,13 +1,8 @@
 'use strict';
 var ie = angular.module('myApp', [
-  //external
+
   'ui.router',
   'ui.bootstrap'
-
-  //internal
-  // 'dateDirective'
-  // 'HomeCtrl',
-
 
 ]);
   ie.config(function($stateProvider, $urlRouterProvider) {
@@ -46,6 +41,3 @@ var ie = angular.module('myApp', [
     $urlRouterProvider.otherwise('/');
   });
 
-  // angular.module('myApp').controller('MainCtrl', function($scope) {
-  //
-  // });

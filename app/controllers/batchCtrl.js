@@ -3,7 +3,7 @@ angular.module('myApp').service('mySharedService', function(){
 
 	var sharedService = this;
 	sharedService.batchData = [];
-	sharedService.cardData = [];
+	sharedService.newAddedPerson = [];
 
 	sharedService.setbatchData = function(data){
 		this.batchData = data;
@@ -13,11 +13,19 @@ angular.module('myApp').service('mySharedService', function(){
 		return this.batchData;
 	}
 	
+	sharedService.setNewAddedPerson = function(data){
+		this.newAddedPerson.push(data);
+	}
+	
+	sharedService.getNewAddedPerson = function(){
+		return this.newAddedPerson;
+	}
+	
     return sharedService;
 
 });
 
-angular.module('myApp').controller('BatchCtrl', function($http, mySharedService){
+angular.module('myApp').controller('BatchCtrl', function($httpParamSerializer, $http, mySharedService){
 	
   var myData = this;
   myData.showUpdateFields=false;
@@ -40,12 +48,41 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
   
   myData.postBatch = function(){
 	  console.log(myData.newBatchInput);
-	  console.log(myData.firstName);
 	  var data = JSON.stringify({
 		  name: myData.newBatchInput
 	  });
 	  
 	  $http.post("//localhost:8080/api/v1/batches", data).then(function(response){
+		  
+	  },
+	  function(response){
+		  
+	  });
+  }
+ 
+  myData.deleteBatch = function(input){
+	  console.log(input);
+
+	  $http.delete("//localhost:8080/api/v1/batches//" + input.id)
+	  	.then(
+			function(response) {
+				console.log("successfully deleted " + input.name);
+		
+			},
+			function(response) {
+				console.log("failed to delete " + input.name); 
+				
+			}
+		);	
+
+  }  
+  myData.addMembersToBatch = function(b){
+	  myData.newStudents = myData.studentIds.split(",");
+  
+	  var data = {};
+	  data.personIds = myData.newStudents;
+	  data = $httpParamSerializer(data);
+	  $http.post("//localhost:8080/api/v1/batches/"+b.id+"/members", myData.newStudents).then(function(response){
 		  
 	  },
 	  function(response){
@@ -64,24 +101,25 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
   }
   
   myData.updateBatch = function(b){
-	  console.log("lets update now");
-	  console.log(b);
-//	  myData.showUpdateFields=true;
-//	  myData.updatedBranch = b; 
-//	  console.log (b);
-//	  
-//	  var data = JSON.stringify({
-//		  name: myData.newBatchNameInput,
-//		  id: myData.batchIdInput
-//	  });
-//	  
-//	  $http.put("//localhost:8080/api/v1/batches", data).then(function(response){
-//		  
-//	  },
-//	  function(response){
-//		  
-//	  });
+	  
+	  //myData.showUpdateFields=true;
+	  console.log(b.id);
+	  console.log(myData.updatedName);
+	  var data = JSON.stringify({
+		  name: myData.updatedName
+	  });
+	
+	  $http.put("//localhost:8080/api/v1/batches/"+b.id, data)
+	   .then(
+	       function(response){
+	    	   console.log("success");
+	       }, 
+	       function(response){
+	    	   console.log("failing");
+	       }
+	    );
   }
+
 });
 
 angular.module('myApp').controller('TabsDemoCtrl', function($http, $scope, $window, mySharedService){
@@ -135,16 +173,6 @@ angular.module('myApp').controller('CreateBatch', function($scope, $window){
 
 angular.module('myApp').controller('addPersonController', function(mySharedService) {
 
-	  this.choices = [];
 	  
-	  this.addNewChoice = function() {
-	    var newItemNo = this.choices.length+1;
-	    this.choices.push({'id':'choice'+newItemNo});
-	  };
-	  
-	  this.removeChoice = function() {
-		    var lastItem = this.choices.length-1;
-		    this.choices.splice(lastItem);
-		  };
 });
 
