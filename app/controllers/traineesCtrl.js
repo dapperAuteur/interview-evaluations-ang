@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 'use strict';
 angular.module('myApp').controller('TraineesCtrl', function($http){
 

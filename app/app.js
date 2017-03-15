@@ -7,6 +7,7 @@ var ie = angular.module('myApp', [
   //internal
   // 'dateDirective'
   // 'HomeCtrl',
+  
 
 ]);
   ie.config(function($stateProvider, $urlRouterProvider) {
@@ -17,42 +18,35 @@ var ie = angular.module('myApp', [
         templateUrl: 'app/templates/home-tmpl.html',
         controller: 'HomeCtrl as home'
       })
+       .state('persons', {
+        url: '/persons',
+        templateUrl: 'app/templates/persons-tmpl.html'
+
+      }) 
       .state('batch', {
         url: '/batch',
         templateUrl: 'app/templates/batch-tmpl.html',
         controller: 'BatchCtrl as batch'
       })
-      .state('evaluations', {
+      .state('evaluation', {
         url: '/evaluations',
-        templateUrl: 'app/templates/evaluations-tmpl.html',
-        controller: 'EvaluationsCtrl as evaluations'
-      })
-      .state('faq', {
-        url: '/faq',
-        templateUrl: 'app/templates/faq-tmpl.html',
-        controller: 'FAQCtrl as faq'
+        templateUrl: 'app/templates/evaluations-tmpl.html'
+      })  
+      .state('wiki', {
+        url: '/wiki',
+        templateUrl: 'app/templates/wiki-tmpl.html',
+        controller: 'WikiCtrl as wiki'
       })
       .state('questions', {
         url: '/questions',
-        templateUrl: 'app/templates/questions-tmpl.html',
-        controller: 'QuestionsCtrl as questions'
+        templateUrl: 'app/templates/questions-tmpl.html'
       })
       .state('subjects', {
         url: '/subjects',
         templateUrl: 'app/templates/subjects-tmpl.html',
         controller: 'SubjectsCtrl as subjects'
       })
-      .state('trainees', {
-        url: '/trainees',
-        templateUrl: 'app/templates/trainees-tmpl.html',
-        controller: 'TraineesCtrl as trainees'
-      })
-      .state('trainers', {
-        url: '/trainers',
-        templateUrl: 'app/templates/trainers-tmpl.html',
-        controller: 'TrainersCtrl as trainers'
-      });
-
+      
     //default routing
     $urlRouterProvider.otherwise('/');
   });
