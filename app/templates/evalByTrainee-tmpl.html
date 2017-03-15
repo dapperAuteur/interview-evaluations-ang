@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div data-ng-controller="EvalTraineeController as evaltrainee">
+  <div data-ng-controller="evaluationsCtrl as evals" data-ng-init="evals.getTraineeEvals(evaltrainee.param)">
+	<div data-ng-repeat="eval in evals.search">
+
+       	Eval ID: {{eval.id}} </br>
+       	Eval Type (QC / Trainer): {{eval.evalType.description}} </br>
+        Trainee Name: {{eval.trainee.firstName + " " +  eval.trainee.lastName}} </br>
+        Trainee ID: {{eval.trainee.id}} </br>
+        Evaluation Week: {{eval.week}} </br>
+        Questions </br></br>
+            <div data-ng-repeat ="evalQuestion in eval.questions">
+                Subject: {{evalQuestion.questionPool.subjectId.subject}} </br>
+                Question: {{evalQuestion.questionPool.questionText}} </br>
+                Knowledge Score: {{evalQuestion.communicationScore}} / {{evalQuestion.questionPool.maxKnowledgeScore}} </br>
+                Communication Score: {{evalQuestion.knowledgeScore}} / {{evalQuestion.questionPool.maxCommunicationScore}} </br>
+                Comments:  </br>
+                <div data-ng-repeat = "comment in evalQuestion.comments">
+                    {{comment.commentText}} </br>
+                    </br>
+                </div>
+                </br>
+            </div>
+        </div>
+	</div>
+</div>
+
+</body>
+</html>

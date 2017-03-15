@@ -12,6 +12,8 @@
 
 </div>
 </div>
+<div class="row" ng-controller="getAllBatches as getAll">
+	<div class="col-md-12" ng-controller="TabsDemoCtrl as tabctrl">
 
 <div class="row" data-ng-controller="BatchCtrl as batch">
 <div class="row" data-ng-controller="getAllBatches as getAll">
@@ -27,8 +29,10 @@
 			</form>
 		</div>
 		</uib-tab>
-		<uib-tab data-ng-click="tabctrl.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<uib-tab data-ng-click="getAll.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		
 		<div class="col-md-5">
+		<button class="btn btn-default" ng-click="tabctrl.getBatches()">Show Batches</button>
 			<table data-ng-hide="batch.showUpdateFields" class="table table-bordered table-hover table-condensed">
 			<thead>
 			<tr>
@@ -41,14 +45,16 @@
 			<tr data-ng-repeat="b in tabctrl.newData" align="center">
 			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
-			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>			
+
+			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button ng-click="batch.deleteBatch(b)" class="btn btn-danger tableButton">delete</button></td>			
+
 			</tr>
 			</tbody>
 			</table>
 			<div data-ng-show = "batch.showUpdateFields">
 					<input data-ng-model="batch.updatedName" type="text" placeholder="{{batch.updatedBranch.name}}"/>
 					<input data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
-					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
+					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
 					<table class="table table-bordered table-hover">
 					<thead>
 					<tr>
@@ -72,7 +78,7 @@
 						<button class="remove" data-ng-show="$last"
 							data-ng-click="batch.removeChoice()">-</button>
 					</fieldset>
-					
+
 				</div>
 				</div>
 		
@@ -81,5 +87,6 @@
 		</div>
 	</div>
 </div>
+
 
 

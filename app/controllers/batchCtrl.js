@@ -48,7 +48,6 @@ angular.module('myApp').controller('BatchCtrl', function($httpParamSerializer, $
   
   myData.postBatch = function(){
 	  console.log(myData.newBatchInput);
-	  console.log(myData.firstName);
 	  var data = JSON.stringify({
 		  name: myData.newBatchInput
 	  });
@@ -60,7 +59,23 @@ angular.module('myApp').controller('BatchCtrl', function($httpParamSerializer, $
 		  
 	  });
   }
-  
+ 
+  myData.deleteBatch = function(input){
+	  console.log(input);
+
+	  $http.delete("//localhost:8080/api/v1/batches//" + input.id)
+	  	.then(
+			function(response) {
+				console.log("successfully deleted " + input.name);
+		
+			},
+			function(response) {
+				console.log("failed to delete " + input.name); 
+				
+			}
+		);	
+
+  }  
   myData.addMembersToBatch = function(b){
 	  myData.newStudents = myData.studentIds.split(",");
   
@@ -91,16 +106,18 @@ angular.module('myApp').controller('BatchCtrl', function($httpParamSerializer, $
 	  console.log(b.id);
 	  console.log(myData.updatedName);
 	  var data = JSON.stringify({
-		  name: myData.updatedName,
-		  id: b.id
+		  name: myData.updatedName
 	  });
-	  
-	  $http.put("//localhost:8080/api/v1/batches", data).then(function(response){
-		  
-	  },
-	  function(response){
-		  console.log("failing");
-	  });
+	
+	  $http.put("//localhost:8080/api/v1/batches/"+b.id, data)
+	   .then(
+	       function(response){
+	    	   console.log("success");
+	       }, 
+	       function(response){
+	    	   console.log("failing");
+	       }
+	    );
   }
 
 });
@@ -117,13 +134,21 @@ angular.module('myApp').controller('TabsDemoCtrl', function($http, $scope, $wind
 });
 
 angular.module('myApp').controller('getAllBatches', function($http, mySharedService){
-	
+
 	var myData = this;
+	
+	myData.currentPage = 0;
+	myData.pageSize = 20;
+	
 	myData.getBatches = function(){
 		$http({
 		      method: "GET",
-		      url: "//localhost:8080/api/v1/batches/"
+		      url: "//localhost:8080/api/v1/batches?page=" + myData.currentPage
 		    }).then(function(response){
+		      
+		      console.log(response);
+		      var pages = response.data.totalPages;
+		      console.log("pages " + pages);
 		      
 		      myData.batches = response.data.content;
 		      mySharedService.setbatchData(myData.batches);

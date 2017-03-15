@@ -1,1 +1,146 @@
-<h1>Questions Template</h1>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+
+<div class = "container-fluid">
+
+<h1>Questions</h1>
+
+<div class = "container-fluid" data-ng-controller ="questionsCtrl as controller">
+    
+    <div>
+        <button data-ng-click = "showAdd = ! showAdd; showUpdate = false; showPage = false">Add Question</button>
+    </div>
+    
+    <div style="display:inline-block" ng-show="showAdd">
+        </br>
+        <div style="display:inline-block">
+            Max Communication Score </br>
+            <input type="number" data-ng-model="comInput"/>
+        </div>
+        
+        <div style="display:inline-block">
+            Max Knowledge Score </br>
+            <input type="number" data-ng-model="knowInput"/>
+        </div>
+        
+        <div style="display:inline-block">
+            Question Text </br>
+            <input type="text" data-ng-model="textInput"/>
+        </div>
+        
+        <div style="display:inline-block">
+            Subject ID </br>
+            <input type="number" data-ng-model="subSelect"/>
+        </div>
+        
+        <div style="display:inline-block">
+            <button data-ng-click = "controller.addNewQuestion(comInput, knowInput, textInput, subSelect)">Add New Question</button>
+        </div>
+        </br></br>
+    </div>
+    
+    </br>
+    
+    <button data-ng-click = "controller.getQuestions(); showPage = true">Get All Questions</button>
+    
+    </br></br>
+
+    Subject </br>
+    <input type="text" data-ng-model="subInput"/>
+
+    <button data-ng-click = "controller.getQuestions(subInput); showPage = true">Get Questions by Subject</button>      
+          
+    </br></br>
+    
+    <div style="display:inline-block">
+        <div style="display:inline-block">
+            Question Text </br>
+            <input type="text" data-ng-model="contInput"/>
+        </div>
+            
+        <div style="display:inline-block">
+            Subject </br>
+            <input type="text" data-ng-model="subDrop"/>
+        </div>
+        
+        <button data-ng-click = "controller.searchForQuestions(contInput,subDrop); showPage = false">Get Question by Text</button>
+    </div>
+    
+    </br></br>
+    
+    <div data-ng-repeat="question in controller.search">
+
+        Question ID: {{question.id}} </br>
+        Max Communication Score: {{question.maxCommunicationScore}} </br>
+        Max Knowledge Score: {{question.maxKnowledgeScore}} </br>
+        Question Text: {{question.questionText}} </br>
+        Subject: {{question.subject.subject}} </br>
+        Times Used: {{question.useCount}} </br>
+
+        <div>
+            <button data-ng-click = "showUpdate = ! showUpdate; showAdd = false">Update Question</button>
+        </div>
+        
+        <div ng-show="showUpdate" style="display:inline-block">
+            <div style="display:inline-block">
+                Max Communication Score </br>
+                <input type="number" data-ng-model="comScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Max Knowledge Score </br>
+                <input type="number" data-ng-model="knowScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Question Text </br>
+                <input type="text" data-ng-model="textField"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Subject ID </br>
+                <input type="text" data-ng-model="subRot"/>
+            </div>
+            
+            <div style="display:inline-block">
+                <button data-ng-click = "controller.updateQuestion(question.id,comScore,knowScore,textField,subRot); showPage = false">Submit Update</button>
+            </div>
+            
+            </br></br>
+         </div>
+
+        <div>
+            <button data-ng-click = "controller.deleteQuestion(question.id); showPage = false">Delete Question</button>
+            </br>
+        </div>
+        
+        <div style="display:inline-block">
+            <div style="display:inline-block">
+                Eval ID </br>
+                <input type="number" data-ng-model="evalId"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Communication Score </br>
+                <input type ="number" data-ng-model="comScore"/>
+            </div>
+            
+            <div style="display:inline-block">
+                Knowledge Score </br>
+                <input type ="number" data-ng-model="knoScore"/>                
+            </div>
+            
+            <div style="display:inline-block">
+                <button data-ng-click="controller.addToEval(question,evalId,comScore,knoScore); showPage = false">Add Question to Eval</button>
+            </div>
+        </div>
+        
+        </br></br>
+    </div>
+    
+    <ul ng-show = "showPage" uib-pagination total-items="controller.search.length" max-size = "controller.maxSize" class="pagination-sm"
+        items-per-page = "controller.itemsPerPage" ng-model = "controller.currentPage" ng-change="controller.pageChanged()">
+    </ul>
+    
+</div>
+
+</div>

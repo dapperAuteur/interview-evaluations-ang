@@ -72,9 +72,13 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 });
 
 // View person by name: (May have to change the urls)
-angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window){
+
+angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window, $state, evaluationsService){
+
 	
   var myData = this;
+  
+  evaluationsService.evalsFromPerson = false;
   
   myData.roles =  [
 	  {title : "Choose role", id : "0"},
@@ -260,7 +264,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	  
 	  myData.updated = JSON.stringify(myData.uJson);
 	  console.log(myData.updated);
-	  $http.put("//localhost:8080/api/v1/persons", myData.updated)
+	  $http.put("//localhost:8080/api/v1/persons/"+myData.uJson.id, myData.updated)
 	  	.then(
 				function(response) {
 					console.log("success update");
@@ -303,23 +307,40 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	// EVALS
 	
    myData.getEvals = function(perval) {
+
+	   
+	   var promise = evaluationsService.getTraineeEvaluations(perval.id);
+       promise.then(function(result){
+           myData.search = result;
+//           console.log(myData.search);
+           evaluationsService.evalsFromPersonSearch=myData.search;
+           evaluationsService.evalsFromPerson = true;
+           $state.go('evaluation');
+//           evaluationsService.search = myData.search;
+       }, function(result){
+	        console.log("fail search " + result);
+	   });
+	   
+
+   }
+   
+   myData.changePage = function(page) {
 	   
 	   $http({
 	        method: "GET",
-	        url: "//localhost:8080/api/v1/evaluations/trainees/" + perval.id
+	        url: "//localhost:8080/api/v1/persons?page="+page
 	        
 	      }).then(function(response){
-	    	  
-	    	console.log("success eval ");
-	        console.log(response.data.content);
-	        //myData.eval = response.data.content;
-	        
+	        console.log(response);
+	        myData.persons = response.data.content;
+	        console.log("success page " + page + response.data);
 
 	      }, function(response){
 	        console.log("fail search " + response);
 	      });
-	   
    }
+   
+   
 });
 
 angular.module('myApp').controller('TestCtrl', function() {

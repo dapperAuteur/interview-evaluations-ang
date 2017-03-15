@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
@@ -7,7 +8,9 @@
 </head>
 <body>
 
-<br/>
+<div class = "container-fluid">
+
+
 <h2>Persons</h2>
 
 
@@ -68,12 +71,20 @@
   			<td>{{p.firstName}} {{p.lastName}} </td>
   			<td>{{p.personRole.title | uppercase}} </td>
   			<td><button class = "deleteBtn btn btn-danger" data-ng-click="pers.deletePerson(p)" data-confirmation-needed>Delete</button> 
-  				<button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button>
-  				<button class = "evalBtn btn btn-primary" data-ng-click="pers.getEvals(p)">Evaluations</button>
+  				&nbsp;&nbsp;&nbsp;&nbsp;<button class = "updateBtn btn btn-warning" data-ng-click="pers.updatePerson(p)">Update</button>
+  				&nbsp;&nbsp;&nbsp;&nbsp;<button class = "evalBtn btn btn-primary" data-ng-click="pers.getEvals(p)">Evaluations</button>
   			</td>
   		</tr>
   	</table>
   	 
+  	<ul class="pagination">
+    	<li><a data-ng-click="pers.changePage(0)">1</a></li>
+   		<li><a data-ng-click="pers.changePage(1)">2</a></li>
+   	    <li><a data-ng-click="pers.changePage(2)">3</a></li>
+        <li><a data-ng-click="pers.changePage(3)">4</a></li>
+        <li><a data-ng-click="pers.changePage(4)">5</a></li>
+  	</ul>
+  
   </div>
 </div> 
     
@@ -96,28 +107,9 @@
 	</div>
 </div>
 
-<!-- END search for person div -->  
-  <br/><br/>
 
-<!-- get person by id -- not needed? -->
-<!-- <div> -->
-<!--   <input type="text" data-ng-model="input" placeholder="Id"/> -->
-<!--   <button data-ng-click="pers.getPersonId(input)">Get Person by Id</button> -->
-  
-<!--    <div data-ng-show="pers.personsId"> -->
-<!--     <div> -->
-<!--     	<h3>{{pers.personsId.firstName}} {{pers.personsId.lastName}}</h3> -->
-<!--     </div> -->
-<!--     <div> -->
-<!--     	<h4>{{pers.personsId.personRole.title}}</h4> -->
-<!--     </div> -->
-<!--    </div> end ng show -->
-   
-<!--    <br/><br/><br/>    -->
-     
-<!-- </div> -->
-<!--END get person by id -- not needed? -->
 
+</div>
 
 </body>
 </html>
