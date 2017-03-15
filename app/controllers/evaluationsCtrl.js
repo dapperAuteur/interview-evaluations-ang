@@ -14,7 +14,15 @@ angular.module("myApp").controller("evaluationsCtrl",['evaluationsService', '$lo
     var evalData = this;
 
     evalData.search=[];
+    
+    
     evalData.delete;
+    
+    //This is only called when jumping from evals button on persons page
+    if(evaluationsService.evalsFromPerson){
+    	evalData.search = evaluationsService.evalsFromPersonSearch; // sets the search array to the clicked persons
+    	evaluationsService.evalsFromPerson = false; // clears the ability to set the array if moving to evals from controller other than persons
+    }
     
     evalData.currentPage = 1;
     evalData.itemsPerPage = 10;

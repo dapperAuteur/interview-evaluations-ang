@@ -72,9 +72,11 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 });
 
 // View person by name: (May have to change the urls)
-angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window){
+angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window, $state, evaluationsService){
 	
   var myData = this;
+  
+  evaluationsService.evalsFromPerson = false;
   
   myData.roles =  [
 	  {title : "Choose role", id : "0"},
@@ -304,20 +306,20 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	
    myData.getEvals = function(perval) {
 	   
-	   $http({
-	        method: "GET",
-	        url: "//localhost:8080/api/v1/evaluations/trainees/" + perval.id
-	        
-	      }).then(function(response){
-	    	  
-	    	console.log("success eval ");
-	        console.log(response.data.content);
-	        //myData.eval = response.data.content;
-	        
+	   
+	   var promise = evaluationsService.getTraineeEvaluations(perval.id);
+       promise.then(function(result){
+           myData.search = result;
+           console.log(myData.search);
+           evaluationsService.evalsFromPersonSearch=result;
+       }, function(result){
+	        console.log("fail search " + result);
+	   });
+	   
+       evaluationsService.evalsFromPerson = true;
+       $state.go('evaluation');
 
-	      }, function(response){
-	        console.log("fail search " + response);
-	      });	   
+	   
    }
    
    myData.changePage = function(page) {
