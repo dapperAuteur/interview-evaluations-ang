@@ -22,18 +22,6 @@
 			<form>
 				batch name:<input placeholder="batch name" type="text"
 					data-ng-model="batch.newBatchInput" />
-				<div data-ng-controller="addPersonController as addPerson">
-					<fieldset data-ng-repeat="choice in addPerson.choices">
-						first name: <input type="text" data-ng-model="choice.firstName" name=""
-							placeholder="first name">last name: <input type="text"
-							data-ng-model="choice.lastName" name="" placeholder="last name">
-						
-						<button class="remove" data-ng-show="$last"
-							data-ng-click="addPerson.removeChoice()">-</button>
-					</fieldset>
-					<button class="addfields" data-ng-click="addPerson.addNewChoice()">Add
-						person</button>
-				</div>
 				<button data-ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
 					Batch</button>
 			</form>
@@ -58,7 +46,9 @@
 			</tbody>
 			</table>
 			<div data-ng-show = "batch.showUpdateFields">
-					<input type="text" placeholder="{{batch.updatedBranch.name}}"/><button class="btn btn-danger" data-ng-click="batch.updateBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
+					<input data-ng-model="batch.updatedName" type="text" placeholder="{{batch.updatedBranch.name}}"/>
+					<input data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
+					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
 					<table class="table table-bordered table-hover">
 					<thead>
 					<tr>
@@ -73,18 +63,17 @@
 					</tbody>
 					</table>
 					
-					<div data-ng-controller="addPersonController as addPerson">
-					<fieldset data-ng-repeat="choice in addPerson.choices">
-						first name: <input type="text" data-ng-model="choice.firstName" name=""
+					<div>
+					<fieldset data-ng-repeat="choice in batch.choices">
+						first name: <input type="text" data-ng-model="batch.firstName" name=""
 							placeholder="first name">last name: <input type="text"
 							data-ng-model="choice.lastName" name="" placeholder="last name">
 						
 						<button class="remove" data-ng-show="$last"
-							data-ng-click="addPerson.removeChoice()">-</button>
+							data-ng-click="batch.removeChoice()">-</button>
 					</fieldset>
-					<button class="addfields" data-ng-click="addPerson.addNewChoice()">Add
-						person</button>
-				</div>s
+					
+				</div>
 				</div>
 		
 		</div>
