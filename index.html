@@ -63,10 +63,12 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
               <ul class="nav navbar-nav" data-ng-controller="getAllBatches as getAll">
                 <li><a data-ui-sref="persons">Person</a></li>
                 <li><a data-ui-sref="batch" data-ng-click = "getAll.getBatches()">Batch</a></li>
                 <li><a data-ui-sref="evaluation">Evaluations</a></li>
+
                 <li><a data-ui-sref="questions">Questions</a></li>
                 <li><a data-ui-sref="wiki">Wiki</a></li>
                 <li><a data-ui-sref="subjects">Subjects</a></li>
@@ -75,12 +77,14 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+
         
         <data-ui-view></data-ui-view>
              
         <footer>
 			&copy;Revature 2017
 		</footer>
+
     </body>
 
 </html>
