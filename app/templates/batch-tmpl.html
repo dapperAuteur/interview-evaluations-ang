@@ -27,7 +27,7 @@
 
 				</div>
 
-				<button data-ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
+				<button data-ng-click="batch.postBatch()" class="btn btn-success" type="submit">Create
 					Batch</button>
 			</form>
 		</div>
@@ -60,7 +60,7 @@
 			<div data-ng-show = "batch.showUpdateFields">
 					<input data-ng-model="batch.updatedName" type="text" placeholder="{{batch.updatedBranch.name}}"/>
 					<input data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
-					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
+					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Go Back</button>
 					<table class="table table-bordered table-hover">
 					<thead>
 					<tr>
