@@ -1,4 +1,4 @@
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 
 <div class="row">
@@ -29,8 +29,8 @@
 						first name: <input type="text" data-ng-model="choice.firstName" name=""
 							placeholder="first name">last name: <input type="text"
 							data-ng-model="choice.lastName" name="" placeholder="last name">
-						
-						<button class="remove" data-ng-show="$last"
+
+						<button class="btn btn-danger remove" data-ng-show="$last"
 							data-ng-click="addPerson.removeChoice()">-</button>
 					</fieldset>
 					<button class="addfields" data-ng-click="addPerson.addNewChoice()">Add
@@ -56,7 +56,7 @@
 			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
 
-			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>			
+			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button class="btn btn-danger tableButton">delete</button></td>
 
 			</tr>
 			</tbody>
@@ -76,13 +76,13 @@
 					</tr>
 					</tbody>
 					</table>
-					
+
 					<div data-ng-controller="addPersonController as addPerson">
 					<fieldset data-ng-repeat="choice in addPerson.choices">
 						first name: <input type="text" data-ng-model="choice.firstName" name=""
 							placeholder="first name">last name: <input type="text"
 							data-ng-model="choice.lastName" name="" placeholder="last name">
-						
+
 						<button class="remove" data-ng-show="$last"
 							data-ng-click="addPerson.removeChoice()">-</button>
 					</fieldset>
@@ -90,12 +90,9 @@
 						person</button>
 				</div>
 				</div>
-		
+
 		</div>
 		</uib-tab> </uib-tabset>
 		</div>
 	</div>
 </div>
-
-
-
