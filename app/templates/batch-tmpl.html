@@ -1,4 +1,4 @@
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
 
 
 <div class="row">
@@ -19,20 +19,17 @@
 <div class="row" data-ng-controller="getAllBatches as getAll">
 	<div class="col-md-12" data-ng-controller="TabsDemoCtrl as tabctrl">
 		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
-			classes="btn-sm">
+			classes="btn-md">
 		<div class="col-md-3">
 			<form>
 				batch name:<input placeholder="batch name" type="text"
 					data-ng-model="batch.newBatchInput" />
-
-				</div>
-
-				<button data-ng-click="batch.postBatch()" class="btn btn-info btn-xs" type="submit">Create
+				<button data-ng-click="batch.postBatch()" class="btn btn-success" type="submit">Create
 					Batch</button>
 			</form>
 		</div>
 		</uib-tab>
-		<uib-tab data-ng-click="getAll.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<uib-tab data-ng-click="getAll.getBatches()" heading="Update/Delete Batch" classes="btn-md">
 		
 		<div class="col-md-5">
 		<button class="btn btn-default" ng-click="tabctrl.getBatches()">Show Batches</button>
@@ -49,10 +46,7 @@
 			<td>{{b.id}}</td>
 			<td>{{b.name}}</td>
 
-
-
 			<td><button data-ng-click="batch.showUpdateBatchInit(b)" class="btn btn-warning tableButton">update</button><button ng-click="batch.deleteBatch(b)" class="btn btn-danger tableButton">delete</button></td>			
-
 
 			</tr>
 			</tbody>
@@ -60,7 +54,7 @@
 			<div data-ng-show = "batch.showUpdateFields">
 					<input data-ng-model="batch.updatedName" type="text" placeholder="{{batch.updatedBranch.name}}"/>
 					<input data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
-					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Cancel Update</button>
+					<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Go Back</button>
 					<table class="table table-bordered table-hover">
 					<thead>
 					<tr>
@@ -74,16 +68,20 @@
 					</tr>
 					</tbody>
 					</table>
+					
+					<div>
+					<fieldset data-ng-repeat="choice in batch.choices">
+						first name: <input type="text" data-ng-model="batch.firstName" name=""
 							placeholder="first name">last name: <input type="text"
 							data-ng-model="choice.lastName" name="" placeholder="last name">
-
+						
 						<button class="remove" data-ng-show="$last"
 							data-ng-click="batch.removeChoice()">-</button>
 					</fieldset>
 
 				</div>
 				</div>
-
+		
 		</div>
 		</uib-tab> </uib-tabset>
 		</div>
