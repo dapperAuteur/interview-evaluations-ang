@@ -3,7 +3,7 @@
 <div class = "container-fluid" data-ng-controller ="questionsCtrl as controller">
     
     <div>
-        <button data-ng-click = "showAdd = ! showAdd">Add Question</button>
+        <button data-ng-click = "showAdd = ! showAdd; showUpdate = false; showPage = false">Add Question</button>
     </div>
     
     <div style="display:inline-block" ng-show="showAdd">
@@ -36,14 +36,14 @@
     
     </br>
     
-    <button data-ng-click = "controller.getQuestions()">Get All Questions</button>
+    <button data-ng-click = "controller.getQuestions(); showPage = true">Get All Questions</button>
     
     </br></br>
 
     Subject </br>
     <input type="text" data-ng-model="subInput"/>
 
-    <button data-ng-click = "controller.getQuestions(subInput)">Get Questions by Subject</button>      
+    <button data-ng-click = "controller.getQuestions(subInput); showPage = true">Get Questions by Subject</button>      
           
     </br></br>
     
@@ -58,7 +58,7 @@
             <input type="text" data-ng-model="subDrop"/>
         </div>
         
-        <button data-ng-click = "controller.searchForQuestions(contInput,subDrop)">Get Question by Text</button>
+        <button data-ng-click = "controller.searchForQuestions(contInput,subDrop); showPage = false">Get Question by Text</button>
     </div>
     
     </br></br>
@@ -73,7 +73,7 @@
         Times Used: {{question.useCount}} </br>
 
         <div>
-            <button data-ng-click = "showUpdate = ! showUpdate">Update Question</button>
+            <button data-ng-click = "showUpdate = ! showUpdate; showAdd = false">Update Question</button>
         </div>
         
         <div ng-show="showUpdate" style="display:inline-block">
@@ -98,14 +98,14 @@
             </div>
             
             <div style="display:inline-block">
-                <button data-ng-click = "controller.updateQuestion(question.id,comScore,knowScore,textField,subRot)">Submit Update</button>
+                <button data-ng-click = "controller.updateQuestion(question.id,comScore,knowScore,textField,subRot); showPage = false">Submit Update</button>
             </div>
             
             </br></br>
          </div>
 
         <div>
-            <button data-ng-click = "controller.deleteQuestion(question.id)">Delete Question</button>
+            <button data-ng-click = "controller.deleteQuestion(question.id); showPage = false">Delete Question</button>
             </br>
         </div>
         
@@ -126,10 +126,15 @@
             </div>
             
             <div style="display:inline-block">
-                <button data-ng-click="controller.addToEval(question,evalId,comScore,knoScore)">Add Question to Eval</button>
+                <button data-ng-click="controller.addToEval(question,evalId,comScore,knoScore); showPage = false">Add Question to Eval</button>
             </div>
         </div>
         
         </br></br>
     </div>
+    
+    <ul ng-show = "showPage" uib-pagination total-items="controller.search.length" max-size = "controller.maxSize" class="pagination-sm"
+        items-per-page = "controller.itemsPerPage" ng-model = "controller.currentPage" ng-change="controller.pageChanged()">
+    </ul>
+    
 </div>
