@@ -3,7 +3,7 @@
 <div class = "container-fluid" data-ng-controller ="questionsCtrl as controller">
     
     <div>
-        <button data-ng-click = "showAdd = ! showAdd; showUpdate = false; showPage = false">Add Question</button>
+        <button data-ng-click = "showAdd = ! showAdd; showUpdate = false; showPage = false; controller.clearSearch()">Add Question</button>
     </div>
     
     <div style="display:inline-block" ng-show="showAdd">

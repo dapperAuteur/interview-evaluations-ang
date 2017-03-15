@@ -20,11 +20,15 @@ angular.module('myApp').controller('questionsCtrl',['questionsService', '$log', 
     questionData.itemsPerPage = 10;
     questionData.maxSize = 3;
     
-     questionData.pageChanged = function() {
+    questionData.clearPage =  (function(){
+        questionData.search = [];
+    });
+    
+    questionData.pageChanged = function() {
          $log.log('Page changed to: ' + questionData.currentPage);
      };
      
-     questionData.addToEval=(function(question, evalId, comScore, knoScore){
+    questionData.addToEval=(function(question, evalId, comScore, knoScore){
          var promise = questionsService.addQuestionToEval(question,evalId,comScore,knoScore);
          promise.then(function(result){
              questionData.search = [result];
