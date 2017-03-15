@@ -25,8 +25,12 @@
     <!-- my scripts -->
 
         <script type="text/javascript" src="./app/app.js"></script>
+        
+        <!-- directives -->
         <script type="text/javascript" src="./app/directives/dateDirective.js"></script>
         <script type="text/javascript" src="./app/directives/confirmDirective.js"></script>
+        
+		<!-- controllers -->
         <script type="text/javascript" src="./app/controllers/personsCtrl.js"></script>	
         <script type="text/javascript" src="./app/controllers/batchCtrl.js"></script>
         <script type="text/javascript" src="./app/controllers/evaluationsCtrl.js"></script>
@@ -34,9 +38,12 @@
         <script type="text/javascript" src="./app/controllers/homeCtrl.js"></script>
         <script type="text/javascript" src="./app/controllers/questionsCtrl.js"></script>
         <script type="text/javascript" src="./app/controllers/subjectsCtrl.js"></script>
+        <script type="text/javascript" src="./app/controllers/evalByTraineeCtrl.js"></script>
+        
+        <!-- services -->
         <script type="text/javascript" src="./app/services/evaluationsService.js"></script>
         <script type="text/javascript" src="./app/services/questionsService.js"></script>
-		
+		<script type="text/javascript" src="./app/services/evalTraineeService.js"></script>
     	
 
 
@@ -56,13 +63,14 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav" data-ng-controller="getAllBatches as getAll">
                 <li><a data-ui-sref="persons">Person</a></li>
-                <li><a data-ui-sref="batch">Batch</a></li>
+                <li><a data-ui-sref="batch" data-ng-click = "getAll.getBatches()">Batch</a></li>
                 <li><a data-ui-sref="evaluation">Evaluations</a></li>
                 <li><a data-ui-sref="questions">Questions</a></li>
                 <li><a data-ui-sref="wiki">Wiki</a></li>
                 <li><a data-ui-sref="subjects">Subjects</a></li>
+                <li><a data-ui-sref="evaluationsbyTrainee">Evaluations By Trainee</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->

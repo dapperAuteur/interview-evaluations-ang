@@ -72,7 +72,7 @@ angular.module('myApp').controller('CreateCtrl', function($http, $timeout) {
 });
 
 // View person by name: (May have to change the urls)
-angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, $window){
+angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, evalTraineeService, $state){
 	
   var myData = this;
   
@@ -311,12 +311,13 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 	      }).then(function(response){
 	    	  
 	    	console.log("success eval ");
-	        console.log(response.data.content);
-	        //myData.eval = response.data.content;
+	        console.log(response.data.content[0].trainee.id);
+	        myData.evalTraineeId = response.data.content[0].trainee.id;
+	        evalTraineeService.setTraineeId(myData.evalTraineeId);
+	        $state.go('evaluationsbyTrainee', {tID:'blah'});
 	        
-
 	      }, function(response){
-	        console.log("fail search " + response);
+	        console.log("fail eval " + response);
 	      });	   
    }
    
