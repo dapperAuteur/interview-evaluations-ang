@@ -116,7 +116,7 @@ angular.module('myApp').controller('ViewPersonsCtrl', function($http, $timeout, 
 		        
 		      }).then(function(response){
 		        console.log(response);
-		        myData.persons = response.data;
+		        myData.persons = response.data.content;
 		        console.log("success search " + response.data.content);
 
 		      }, function(response){
