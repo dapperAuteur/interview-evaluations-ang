@@ -23,8 +23,10 @@ body {
 
 }
 
-
-
+.div-style {
+	margin-left:10px;
+	padding-left:10px;
+}
 .top-header {
 
 	width: 100%;
@@ -488,4 +490,14 @@ fieldset{
 input[type="text"],
 select{
     padding:5px;
+}
+
+.text-area-class {
+	width:300px;
+}
+
+.smallCell
+{
+    width: 1px;
+    white-space: nowrap;
 }
