@@ -104,6 +104,7 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 
   }  
   myData.addMembersToBatch = function(b){
+	  if(myData.studentIds != undefined){
 	  myData.newStudents = myData.studentIds.split(",");
   
 	  var data = {};
@@ -115,6 +116,7 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	  function(response){
 		  console.log("failure to add members to batch");
 	  });
+  }
   }
   
   myData.showUpdateBatchInit = function(b){
@@ -131,6 +133,7 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	  
 	  console.log(b.id);
 	  console.log(myData.updatedName);
+	  if(myData.updatedName != undefined){
 	  var data = JSON.stringify({
 		  name: myData.updatedName
 	  });
@@ -144,6 +147,7 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	    	   console.log("failure to update batch name");
 	       }
 	    );
+  }
   }
 
 });
