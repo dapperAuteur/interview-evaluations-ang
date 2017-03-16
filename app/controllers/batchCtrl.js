@@ -3,7 +3,6 @@ angular.module('myApp').service('mySharedService', function(){
 
 	var sharedService = this;
 	sharedService.batchData = [];
-	sharedService.newAddedPerson = [];
 
 	sharedService.setbatchData = function(data){
 		this.batchData = data;
@@ -12,15 +11,7 @@ angular.module('myApp').service('mySharedService', function(){
 	sharedService.getbatchData = function(){
 		return this.batchData;
 	}
-	
-	sharedService.setNewAddedPerson = function(data){
-		this.newAddedPerson.push(data);
-	}
-	
-	sharedService.getNewAddedPerson = function(){
-		return this.newAddedPerson;
-	}
-	
+
     return sharedService;
 
 });
