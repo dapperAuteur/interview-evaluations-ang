@@ -19,12 +19,14 @@
 <div class="row" data-ng-controller="getAllBatches as getAll">
 	<div class="col-md-12 div-style" data-ng-controller="TabsDemoCtrl as tabctrl">
 		<uib-tabset type="pills"> <uib-tab heading="Create Batch"
-			classes="btn-sm">
+			classes="btn-md">
 		<div class="col-md-3">
 			<form>
+
 				<h3><span class="label label-primary">Enter Batch Name</span></h3><input class="text-area-class" placeholder="batch name" type="text"
 					data-ng-model="batch.newBatchInput"/>
 				<button data-ng-click="batch.postBatch()" class="btn btn-info btn-ms" type="submit">Create
+
 					Batch</button>
 			</form>
 			
@@ -33,7 +35,7 @@
 			
 		</div>
 		</uib-tab>
-		<uib-tab data-ng-click="getAll.getBatches()" heading="Update/Delete Batch" classes="btn-sm">
+		<uib-tab data-ng-click="getAll.getBatches()" heading="Update/Delete Batch" classes="btn-md">
 		
 		<div class="panel panel-primary">
 		<div data-ng-hide="batch.showUpdateFields" class="panel-heading">List of All Batches</div>
@@ -58,6 +60,7 @@
 			</tr>
 			</tbody>
 			</table>
+
 			<div class="panel panel-primary" data-ng-show = "batch.showUpdateFields">
 			<div class="panel-heading">Update and View Batch Members</div>
 			<div class="col-md-8 panel-body">
@@ -66,6 +69,7 @@
 			Enter Student IDs:<input class="text-area-class" data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
 			<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); batch.addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Back</button>		
 			</div>
+
 					<table class="table table-bordered table-hover">
 					<thead>
 					<tr class="success">
@@ -102,6 +106,3 @@
 		</div>
 	</div>
 </div>
-
-
-
