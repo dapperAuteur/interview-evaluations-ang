@@ -30,8 +30,8 @@
 					Batch</button>
 			</form>
 			
-			<div data-ng-show="batch.showSuccessAlert" class="alert alert-success" role="alert">{{batch.requestMessage}}</div>
-			<div data-ng-show="batch.showFailureAlert" class="alert alert-danger" role="alert">{{batch.requestMessage}}</div>
+			<div ng-class="{fade: startFade}" data-ng-show="batch.showSuccessAlert" class="alert alert-success" role="alert">{{batch.requestMessage}}</div>
+			<div ng-class="{fade: startFade}" data-ng-show="batch.showFailureAlert" class="alert alert-danger" role="alert">{{batch.requestMessage}}</div>
 			
 		</div>
 		</uib-tab>
@@ -68,6 +68,11 @@
 			<br/>
 			Enter Student IDs:<input class="text-area-class" data-ng-model="batch.studentIds" type="text" placeholder="enter comma separated student Ids"/>
 			<button class="btn btn-danger tableButton" data-ng-click="batch.updateBatch(batch.updatedBranch); batch.addMembersToBatch(batch.updatedBranch)">Submit Update</button><button class="btn btn-warning tableButton" data-ng-click="batch.cancelUpdate()">Back</button>		
+			<div ng-class="{fade: startFade}" data-ng-show="batch.showSuccess" class="alert alert-success" role="alert">{{batch.successFailureMessage}}</div>
+			<div data-ng-show="batch.showFailure" class="alert alert-danger" role="alert">{{batch.successFailureMessage}}</div>
+			<div ng-class="{fade: startFade}" data-ng-show="batch.showSuccessMembers" class="alert alert-success" role="alert">{{batch.successFailureMessageMembers}}</div>
+			<div data-ng-show="batch.showFailureMembers" class="alert alert-danger" role="alert">{{batch.successFailureMessageMembers}}</div>
+			
 			</div>
 
 					<table class="table table-bordered table-hover">
