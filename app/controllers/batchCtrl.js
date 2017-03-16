@@ -16,7 +16,7 @@ angular.module('myApp').service('mySharedService', function(){
 
 });
 
-angular.module('myApp').controller('BatchCtrl', function($http, mySharedService){
+angular.module('myApp').controller('BatchCtrl', function($timeout, $http, mySharedService){
 
   var myData = this;
   myData.showUpdateFields=false;
@@ -41,6 +41,7 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
   myData.postBatch = function(){
 	  myData.showSuccessAlert=false;
 	  myData.showFailureAlert=false;
+	  
 	  console.log(myData.newBatchInput);
 	  if(myData.newBatchInput != undefined){
 	  var data = JSON.stringify({
@@ -50,14 +51,26 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	  $http.post("//localhost:8080/api/v1/batches", data).then(function(response){
 		  myData.showSuccessAlert=true;
 		  myData.requestMessage = "added batch successfully";
+		  myData.startFade = true;
+	        $timeout(function(){
+	            myData.showSuccessAlert = false;
+	        }, 3000);
 	  },
 	  function(response){
 		  myData.showFailureAlert=true;
 		  myData.requestMessage = "unsuccessful in adding batch.";
+		  myData.startFade = true;
+	        $timeout(function(){
+	            myData.showSuccessAlert = false;
+	        }, 3000);
 	  });
   }else{
 	  myData.showFailureAlert=true;
 	  myData.requestMessage = "unsuccessful in adding batch. enter valid batch name";
+	  myData.startFade = true;
+      $timeout(function(){
+          myData.showFailureAlert = false;
+      }, 3000);
   }
   }
  
@@ -96,17 +109,39 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
   }  
   myData.addMembersToBatch = function(b){
 	  if(myData.studentIds != undefined){
+		  myData.showSuccessMembers=false;
+		  myData.showFailureMembers=false;
 	  myData.newStudents = myData.studentIds.split(",");
   
 	  var data = {};
 	  data.personIds = myData.newStudents;
-	  data = $httpParamSerializer(data);
+	  
 	  $http.post("//localhost:8080/api/v1/batches/"+b.id+"/members", myData.newStudents).then(function(response){
 		 console.log("successfully added members to batch");
+		 myData.showSuccessMembers=true;
+		  myData.successFailureMessageMembers = "successfully added to batch";
+		  myData.startFade = true;
+	        $timeout(function(){
+	            myData.showSuccessMembers = false;
+	        }, 3000);
 	  },
 	  function(response){
 		  console.log("failure to add members to batch");
+		  myData.showSuccessMembers=true;
+		  myData.successFailureMessageMembers = "failed to add";
+		  myData.startFade = true;
+	        $timeout(function(){
+	            myData.showSuccessMembers = false;
+	        }, 3000);
 	  });
+  }else{
+	  myData.showSuccessMembers=true;
+	  myData.successFailureMessageMembers = "no members added to batch";
+	  myData.startFade = true;
+        $timeout(function(){
+            myData.showSuccessMembers = false;
+        }, 3000);
+	  
   }
   }
   
@@ -121,7 +156,8 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
   }
   
   myData.updateBatch = function(b){
-	  
+	  myData.showSuccess=false;
+	  myData.showFailure=false;
 	  console.log(b.id);
 	  console.log(myData.updatedName);
 	  if(myData.updatedName != undefined){
@@ -133,11 +169,30 @@ angular.module('myApp').controller('BatchCtrl', function($http, mySharedService)
 	   .then(
 	       function(response){
 	    	   console.log("successfully updated batch name");
+	    	   myData.showSuccess=true;
+	 		  myData.successFailureMessage = "successfully updated";
+	 		  myData.startFade = true;
+	 	        $timeout(function(){
+	 	            myData.showSuccess = false;
+	 	        }, 3000);
 	       }, 
 	       function(response){
 	    	   console.log("failure to update batch name");
+	    	   myData.showFailure=true;
+		 		  myData.successFailureMessage = "unsuccesfully.";
+		 		  myData.startFade = true;
+		 	        $timeout(function(){
+		 	            myData.showFailure = false;
+		 	        }, 3000);
 	       }
 	    );
+  }else{
+	  myData.showSuccess=true;
+		  myData.successFailureMessage = "batch name not updated";
+		  myData.startFade = true;
+	        $timeout(function(){
+	            myData.showSuccess = false;
+	        }, 3000);
   }
   }
 
